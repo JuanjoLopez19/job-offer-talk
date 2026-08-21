@@ -5,10 +5,13 @@ from langfuse import Langfuse
 from langfuse.langchain import CallbackHandler
 from langgraph.checkpoint.redis import RedisSaver
 from langgraph.graph.state import CompiledStateGraph
+from langgraph.types import Command
 from redis import Redis
 
 from app.core.config import Config
 from app.graph.builder import base_builder
+from app.graph.core.config import GraphState
+from app.shared.models import GraphInput
 
 
 @dataclass(slots=True)
@@ -43,7 +46,7 @@ class GraphManager:
     def __get_langfuse_callback(self) -> CallbackHandler:
         return CallbackHandler(public_key=self.config.langfuse_public_key)
 
-    def invoke(self, graph_input: dict[str, Any], *, thread_id: str) -> Any:
+    def invoke(self, graph_input: GraphInput, *, thread_id: str) -> Any:
         if not thread_id.strip():
             raise ValueError("thread_id cannot be empty")
 
@@ -52,7 +55,11 @@ class GraphManager:
             "configurable": {"thread_id": thread_id},
             "callbacks": [self.__get_langfuse_callback()],
         }
-        state = dict(graph_input)
-        state.setdefault("session_id", thread_id)
-        result = graph.invoke(state, config=config)
-        return result.get("assistant_message", "")
+
+        snapshot = graph.get_state(config)
+        print(snapshot)
+        if snapshot.interrupts:
+            return graph.invoke(Command(resume=graph_input.user_input), config=config)
+
+        state = GraphState(**graph_input.model_dump())
+        return graph.invoke(state, config=config)

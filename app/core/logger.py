@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+import warnings
 from typing import Literal
 
 import structlog
@@ -11,6 +12,38 @@ LogFormat = Literal["console", "json"]
 APP_LOGGER_NAME = "app"
 
 _configured = False
+_HUGGING_FACE_WARNING = "You are sending unauthenticated requests to the HF Hub."
+
+
+class _HuggingFaceAuthenticationWarningFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        return _HUGGING_FACE_WARNING not in record.getMessage()
+
+
+_hugging_face_warning_filter = _HuggingFaceAuthenticationWarningFilter()
+
+
+def suppress_model_loading_noise() -> None:
+    """Hide known, non-actionable warnings emitted while loading Kokoro."""
+    warnings.filterwarnings(
+        "ignore",
+        message=r"dropout option adds dropout after all but last recurrent layer.*",
+        category=UserWarning,
+        module=r"torch\.nn\.modules\.rnn",
+    )
+    warnings.filterwarnings(
+        "ignore",
+        message=(
+            r"`torch\.nn\.utils\.weight_norm` is deprecated in favor of "
+            r"`torch\.nn\.utils\.parametrizations\.weight_norm`\."
+        ),
+        category=FutureWarning,
+        module=r"torch\.nn\.utils\.weight_norm",
+    )
+
+    hugging_face_logger = logging.getLogger("huggingface_hub.utils._http")
+    if _hugging_face_warning_filter not in hugging_face_logger.filters:
+        hugging_face_logger.addFilter(_hugging_face_warning_filter)
 
 
 def setup_logging(

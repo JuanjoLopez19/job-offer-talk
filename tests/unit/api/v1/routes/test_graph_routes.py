@@ -14,7 +14,7 @@ def test_graph_route_generates_and_returns_a_thread_id(
     captured: dict[str, Any] = {}
 
     def fake_invoke(
-        _: GraphManager, graph_input: dict[str, Any], *, thread_id: str
+        _: GraphManager, graph_input: Any, *, thread_id: str
     ) -> dict[str, Any]:
         captured["graph_input"] = graph_input
         captured["thread_id"] = thread_id
@@ -37,7 +37,7 @@ def test_graph_route_reuses_the_supplied_thread_id(
     captured: dict[str, Any] = {}
 
     def fake_invoke(
-        _: GraphManager, graph_input: dict[str, Any], *, thread_id: str
+        _: GraphManager, graph_input: Any, *, thread_id: str
     ) -> dict[str, Any]:
         captured["thread_id"] = thread_id
         return {"assistant_message": "Hello"}
@@ -55,3 +55,28 @@ def test_graph_route_reuses_the_supplied_thread_id(
     assert response.status_code == 200
     assert captured["thread_id"] == "thread-1"
     assert response.headers[graph_routes.THREAD_ID_HEADER] == "thread-1"
+
+
+def test_graph_route_forwards_a_scalar_human_response(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, Any] = {}
+
+    def fake_invoke(
+        _: GraphManager, graph_input: Any, *, thread_id: str
+    ) -> dict[str, Any]:
+        captured["graph_input"] = graph_input
+        return {"assistant_message": "Hello"}
+
+    monkeypatch.setattr(GraphManager, "invoke", fake_invoke)
+    app = FastAPI()
+    app.include_router(graph_routes.graph_router)
+
+    response = TestClient(app).post(
+        "/",
+        json="continue",
+        headers={graph_routes.THREAD_ID_HEADER: "thread-1"},
+    )
+
+    assert response.status_code == 200
+    assert captured["graph_input"] == "continue"

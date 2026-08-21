@@ -1,20 +1,27 @@
+from types import SimpleNamespace
 from typing import Any, cast
 
 import pytest
 from langgraph.graph.state import CompiledStateGraph
+from langgraph.types import Command
 
 from app.graph import manager as manager_module
 from app.graph.manager import GraphManager
 
 
 class FakeGraph:
-    def __init__(self) -> None:
-        self.input: dict[str, Any] | None = None
+    def __init__(self, *, interrupted: bool = False) -> None:
+        self.input: Any = None
         self.config: dict[str, Any] | None = None
+        self.interrupted = interrupted
+
+    def get_state(self, _: dict[str, Any]) -> SimpleNamespace:
+        interrupts = (object(),) if self.interrupted else ()
+        return SimpleNamespace(interrupts=interrupts)
 
     def invoke(
         self,
-        graph_input: dict[str, Any],
+        graph_input: Any,
         *,
         config: dict[str, Any],
     ) -> dict[str, Any]:
@@ -29,11 +36,28 @@ def test_invoke_passes_thread_id_to_the_checkpointer() -> None:
 
     result = manager.invoke({}, thread_id="thread-1")
 
-    assert result == "Hello"
+    assert result == {"assistant_message": "Hello"}
     assert graph.input == {"session_id": "thread-1"}
     assert graph.config is not None
     assert graph.config["configurable"] == {"thread_id": "thread-1"}
     assert len(graph.config["callbacks"]) == 1
+
+
+def test_invoke_resumes_a_pending_human_interaction() -> None:
+    graph = FakeGraph(interrupted=True)
+    manager = GraphManager(graph=cast(CompiledStateGraph, graph))
+
+    manager.invoke("continue", thread_id="thread-1")
+
+    assert isinstance(graph.input, Command)
+    assert graph.input.resume == "continue"
+
+
+def test_invoke_requires_an_object_to_start_a_new_interaction() -> None:
+    manager = GraphManager(graph=cast(CompiledStateGraph, FakeGraph()))
+
+    with pytest.raises(ValueError, match="initial graph input"):
+        manager.invoke("continue", thread_id="thread-1")
 
 
 def test_langfuse_client_uses_the_application_configuration(

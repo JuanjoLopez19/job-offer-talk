@@ -1,12 +1,13 @@
 import json
 import logging
+import warnings
 from collections.abc import Iterator
 
 import pytest
 import structlog
 
 from app.core import logger as logger_module
-from app.core.logger import get_logger, setup_logging
+from app.core.logger import get_logger, setup_logging, suppress_model_loading_noise
 
 
 @pytest.fixture(autouse=True)
@@ -66,6 +67,49 @@ def test_stdlib_module_loggers_are_silenced(
     logging.getLogger("uvicorn").info("application startup")
 
     assert capsys.readouterr().out == ""
+
+
+def test_suppress_model_loading_noise_filters_only_known_warnings() -> None:
+    with warnings.catch_warnings(record=True) as caught_warnings:
+        warnings.simplefilter("always")
+        suppress_model_loading_noise()
+
+        warnings.warn_explicit(
+            "dropout option adds dropout after all but last recurrent layer",
+            UserWarning,
+            filename="rnn.py",
+            lineno=1,
+            module="torch.nn.modules.rnn",
+        )
+        warnings.warn_explicit(
+            "`torch.nn.utils.weight_norm` is deprecated in favor of "
+            "`torch.nn.utils.parametrizations.weight_norm`.",
+            FutureWarning,
+            filename="weight_norm.py",
+            lineno=1,
+            module="torch.nn.utils.weight_norm",
+        )
+        warnings.warn("application warning", UserWarning, stacklevel=1)
+
+    assert [str(warning.message) for warning in caught_warnings] == [
+        "application warning"
+    ]
+
+
+def test_suppress_model_loading_noise_filters_hugging_face_auth_message() -> None:
+    suppress_model_loading_noise()
+    logger = logging.getLogger("huggingface_hub.utils._http")
+    record = logger.makeRecord(
+        logger.name,
+        logging.WARNING,
+        __file__,
+        0,
+        "You are sending unauthenticated requests to the HF Hub.",
+        (),
+        None,
+    )
+
+    assert any(not warning_filter.filter(record) for warning_filter in logger.filters)
 
 
 def test_setup_logging_reads_format_from_env(
