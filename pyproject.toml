@@ -1,0 +1,50 @@
+[project]
+name = "job-offer-talk"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.141.1",
+    "faster-whisper>=1.2.1",
+    "kokoro>=0.9.4",
+    "langchain>=1.3.16",
+    "langfuse>=4.14.4",
+    "langgraph>=1.2.11",
+    "langgraph-checkpoint-redis>=0.5.2",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.15.0",
+    "soundfile>=0.14.0",
+    "structlog>=26.1.0",
+    "torch>=2.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "fastapi[standard]>=0.141.1",
+    "pre-commit>=4.5.1",
+    "pyrefly>=0.47.0",
+    "pytest>=9.1.1",
+    "ruff>=0.14.10",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pyrefly]
+project-includes = ["app", "main.py"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
