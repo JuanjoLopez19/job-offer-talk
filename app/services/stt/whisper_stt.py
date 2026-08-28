@@ -1,5 +1,6 @@
 import os
 from dataclasses import dataclass
+from io import BytesIO
 from pathlib import Path
 
 import numpy as np
@@ -29,6 +30,13 @@ class WhisperSTT(BaseSTT):
 
         segments, _ = self.client.transcribe(audio, language="es")
         return "\n".join(segment.text.strip() for segment in segments).strip()
+
+    def transcribe_bytes(self, audio: bytes) -> str:
+        decoded_audio = decode_audio(
+            BytesIO(audio),
+            sampling_rate=WHISPER_SAMPLE_RATE,
+        )
+        return self.transcribe(np.ascontiguousarray(decoded_audio, dtype=np.float32))
 
     def transcribe_file(self, audio_file: str | Path) -> str:
         audio_path = Path(audio_file)

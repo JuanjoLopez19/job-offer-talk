@@ -8,6 +8,9 @@ class BaseSTT(Protocol):
     def load(self, model_name: str, *, device: str | None = None) -> None:
         pass
 
+    def transcribe_bytes(self, audio: bytes) -> str:
+        pass
+
     def transcribe(self, audio: np.ndarray) -> str:
         pass
 
