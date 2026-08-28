@@ -2,6 +2,7 @@ import json
 import logging
 import warnings
 from collections.abc import Iterator
+from typing import Any, cast
 
 import pytest
 import structlog
@@ -109,7 +110,10 @@ def test_suppress_model_loading_noise_filters_hugging_face_auth_message() -> Non
         None,
     )
 
-    assert any(not warning_filter.filter(record) for warning_filter in logger.filters)
+    assert any(
+        not cast(Any, warning_filter).filter(record)
+        for warning_filter in logger.filters
+    )
 
 
 def test_setup_logging_reads_format_from_env(

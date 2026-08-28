@@ -14,7 +14,10 @@ class TtsConfig(BaseModel):
 
 
 class Config(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_nested_delimiter="__")
+    model_config = SettingsConfigDict(
+        env_file=(".env", ".env.local"),
+        env_nested_delimiter="__",
+    )
 
     environment: str = Field("DEV")
     version: str = Field("0.0.1")
@@ -25,3 +28,8 @@ class Config(BaseSettings):
     langfuse_secret_key: str
     langfuse_public_key: str
     langfuse_base_url: str
+
+    llm_provider: str = Field("google")
+    google_api_key: str
+    google_model: str = Field("gemini-3.5-flash-lite")
+    ollama_model: str = Field("gemma4:e2b")

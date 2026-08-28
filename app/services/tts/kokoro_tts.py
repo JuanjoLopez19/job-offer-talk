@@ -1,5 +1,6 @@
 import os
 from dataclasses import dataclass
+from io import BytesIO
 from pathlib import Path
 
 import numpy as np
@@ -44,6 +45,14 @@ class KokoroTTS(BaseTTS):
             raise RuntimeError("No audio generated")
 
         return np.concatenate(chunks)
+
+    def generate_wav(
+        self, text: str, *, voice: str | None = None, speed: float = 1.0
+    ) -> bytes:
+        audio = self.generate(text, voice=voice, speed=speed)
+        buffer = BytesIO()
+        sf.write(buffer, audio, SAMPLE_RATE, format="WAV", subtype="PCM_16")
+        return buffer.getvalue()
 
     def save(self, audio: np.ndarray, filename: str | Path) -> None:
         output_path = Path(filename)

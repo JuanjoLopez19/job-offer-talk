@@ -1,25 +1,27 @@
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
 
 from langfuse import Langfuse
 from langfuse.langchain import CallbackHandler
-from langgraph.checkpoint.redis import RedisSaver
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import Command
 from redis import Redis
 
 from app.core.config import Config
 from app.graph.builder import base_builder
+from app.graph.checkpoint import InterruptAwareRedisSaver
 from app.graph.core.config import GraphState
 from app.shared.models import GraphInput
 
 
 @dataclass(slots=True)
 class GraphManager:
-    checkpointer: RedisSaver = field(init=False)
+    checkpointer: InterruptAwareRedisSaver = field(init=False)
     graph: CompiledStateGraph | None = None
     config: Config = field(default_factory=Config)
     langfuse: Langfuse = field(init=False)
+    graph_output_path: Path = Path("graph.mmd")
 
     def __post_init__(self) -> None:
         self.langfuse = Langfuse(
@@ -34,32 +36,59 @@ class GraphManager:
 
     def __get_checkpointer(self):
         client = Redis(host="localhost", port=6379, decode_responses=False)
-        saver = RedisSaver(redis_client=client)
+        saver = InterruptAwareRedisSaver(
+            redis_client=client,
+            ttl={"default_ttl": 3600},
+        )
         saver.setup()
         return saver
 
-    def __get_graph(self):
+    def export_graph(self, path: Path | None = None) -> Path:
+        """Write a Mermaid diagram without relying on a remote rendering service."""
+        graph = self.__get_graph(export=False)
+        output_path = path or self.graph_output_path
+        output_path.write_text(graph.get_graph().draw_mermaid(), encoding="utf-8")
+        return output_path
+
+    def __get_graph(self, *, export: bool = True):
         if not self.graph:
             self.graph = self.compile_graph()
+            if export:
+                self.export_graph()
         return self.graph
 
     def __get_langfuse_callback(self) -> CallbackHandler:
         return CallbackHandler(public_key=self.config.langfuse_public_key)
 
-    def invoke(self, graph_input: GraphInput, *, thread_id: str) -> Any:
+    def invoke(self, graph_input: GraphInput | str | dict[str, Any], *, thread_id: str):
         if not thread_id.strip():
             raise ValueError("thread_id cannot be empty")
 
-        graph = self.__get_graph()
+        graph = self.__get_graph(export=False)
         config = {
             "configurable": {"thread_id": thread_id},
             "callbacks": [self.__get_langfuse_callback()],
+            "metadata": {"langfuse_session_id": thread_id},
         }
 
         snapshot = graph.get_state(config)
-        print(snapshot)
         if snapshot.interrupts:
-            return graph.invoke(Command(resume=graph_input.user_input), config=config)
+            resume_value = (
+                graph_input.user_input
+                if isinstance(graph_input, GraphInput)
+                else graph_input
+            )
+            state = graph.invoke(Command(resume=resume_value), config=config)
+            return GraphState.model_validate(state)
 
-        state = GraphState(**graph_input.model_dump())
-        return graph.invoke(state, config=config)
+        if isinstance(graph_input, str):
+            raise ValueError("initial graph input must be an object")
+
+        input_data = (
+            graph_input.model_dump()
+            if isinstance(graph_input, GraphInput)
+            else graph_input
+        )
+        state = {**input_data, "session_id": thread_id}
+        state = graph.invoke(state, config=config)
+        return GraphState.model_validate(state)

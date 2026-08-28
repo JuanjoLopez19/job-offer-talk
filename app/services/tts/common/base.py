@@ -13,5 +13,10 @@ class BaseTTS(Protocol):
     ) -> np.ndarray:
         pass
 
+    def generate_wav(
+        self, text: str, *, voice: str | None = None, speed: float = 1.0
+    ) -> bytes:
+        pass
+
     def save(self, audio: np.ndarray, filename: str | Path) -> None:
         pass
