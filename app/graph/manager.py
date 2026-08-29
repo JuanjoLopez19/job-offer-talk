@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from langfuse import Langfuse
+from langfuse import Langfuse, propagate_attributes
 from langfuse.langchain import CallbackHandler
 from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import Command
@@ -28,6 +28,8 @@ class GraphManager:
             public_key=self.config.langfuse_public_key,
             secret_key=self.config.langfuse_secret_key,
             base_url=self.config.langfuse_base_url,
+            environment=self.config.environment,
+            release=self.config.version,
         )
 
     def compile_graph(self):
@@ -69,26 +71,37 @@ class GraphManager:
             "configurable": {"thread_id": thread_id},
             "callbacks": [self.__get_langfuse_callback()],
             "metadata": {"langfuse_session_id": thread_id},
+            "run_name": "job-offer-talk.graph.invoke",
         }
 
-        snapshot = graph.get_state(config)
-        if snapshot.interrupts:
-            resume_value = (
-                graph_input.user_input
+        with propagate_attributes(
+            trace_name=self.config.langfuse_trace_name,
+            session_id=thread_id,
+            tags=["job-offer-talk", "langgraph"],
+            metadata={
+                "environment": self.config.environment,
+                "framework": "langgraph",
+                "version": self.config.version,
+            },
+        ):
+            snapshot = graph.get_state(config)
+            if snapshot.interrupts:
+                resume_value = (
+                    graph_input.user_input
+                    if isinstance(graph_input, GraphInput)
+                    else graph_input
+                )
+                state = graph.invoke(Command(resume=resume_value), config=config)
+                return GraphState.model_validate(state)
+
+            if isinstance(graph_input, str):
+                raise ValueError("initial graph input must be an object")
+
+            input_data = (
+                graph_input.model_dump()
                 if isinstance(graph_input, GraphInput)
                 else graph_input
             )
-            state = graph.invoke(Command(resume=resume_value), config=config)
+            state = {**input_data, "session_id": thread_id}
+            state = graph.invoke(state, config=config)
             return GraphState.model_validate(state)
-
-        if isinstance(graph_input, str):
-            raise ValueError("initial graph input must be an object")
-
-        input_data = (
-            graph_input.model_dump()
-            if isinstance(graph_input, GraphInput)
-            else graph_input
-        )
-        state = {**input_data, "session_id": thread_id}
-        state = graph.invoke(state, config=config)
-        return GraphState.model_validate(state)

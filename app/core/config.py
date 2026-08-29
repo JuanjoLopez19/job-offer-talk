@@ -28,6 +28,7 @@ class Config(BaseSettings):
     langfuse_secret_key: str
     langfuse_public_key: str
     langfuse_base_url: str
+    langfuse_trace_name: str = Field("job-offer-talk")
 
     llm_provider: str = Field("google")
     google_api_key: str

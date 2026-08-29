@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, cast
@@ -44,7 +45,48 @@ def test_invoke_passes_thread_id_to_the_checkpointer() -> None:
     assert graph.config is not None
     assert graph.config["configurable"] == {"thread_id": "thread-1"}
     assert graph.config["metadata"] == {"langfuse_session_id": "thread-1"}
+    assert graph.config["run_name"] == "job-offer-talk.graph.invoke"
     assert len(graph.config["callbacks"]) == 1
+
+
+def test_invoke_sets_custom_langfuse_trace_attributes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    received: dict[str, Any] = {}
+
+    class CompleteFakeGraph(FakeGraph):
+        def invoke(
+            self,
+            graph_input: Any,
+            *,
+            config: dict[str, Any],
+        ) -> dict[str, Any]:
+            super().invoke(graph_input, config=config)
+            return {"session_id": "thread-1", "assistant_message": "Hello"}
+
+    @contextmanager
+    def fake_propagate_attributes(**kwargs: Any):
+        received.update(kwargs)
+        yield
+
+    monkeypatch.setattr(
+        manager_module, "propagate_attributes", fake_propagate_attributes
+    )
+    manager = GraphManager(graph=cast(CompiledStateGraph, CompleteFakeGraph()))
+    manager.config.langfuse_trace_name = "job-offer-conversation"
+
+    manager.invoke({}, thread_id="thread-1")
+
+    assert received == {
+        "trace_name": "job-offer-conversation",
+        "session_id": "thread-1",
+        "tags": ["job-offer-talk", "langgraph"],
+        "metadata": {
+            "environment": manager.config.environment,
+            "framework": "langgraph",
+            "version": manager.config.version,
+        },
+    }
 
 
 def test_invoke_resumes_a_pending_human_interaction() -> None:
@@ -70,10 +112,20 @@ def test_langfuse_client_uses_the_application_configuration(
     received: dict[str, str] = {}
 
     class FakeLangfuse:
-        def __init__(self, *, public_key: str, secret_key: str, base_url: str) -> None:
+        def __init__(
+            self,
+            *,
+            public_key: str,
+            secret_key: str,
+            base_url: str,
+            environment: str,
+            release: str,
+        ) -> None:
             received["public_key"] = public_key
             received["secret_key"] = secret_key
             received["base_url"] = base_url
+            received["environment"] = environment
+            received["release"] = release
 
     monkeypatch.setattr(manager_module, "Langfuse", FakeLangfuse)
 
@@ -82,6 +134,8 @@ def test_langfuse_client_uses_the_application_configuration(
     assert received["public_key"] == manager.config.langfuse_public_key
     assert received["secret_key"] == manager.config.langfuse_secret_key
     assert received["base_url"] == manager.config.langfuse_base_url
+    assert received["environment"] == manager.config.environment
+    assert received["release"] == manager.config.version
 
 
 def test_export_graph_writes_a_local_mermaid_file(tmp_path: Path) -> None:
