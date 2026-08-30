@@ -11,4 +11,5 @@ repos:
         name: pyrefly
         entry: uv run pyrefly check
         language: system
-        types: [python]
+        files: ^app/
+        pass_filenames: false

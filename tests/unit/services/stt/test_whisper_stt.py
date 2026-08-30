@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from app.services.stt.whisper_stt import WHISPER_SAMPLE_RATE, WhisperSTT
+from app.services.stt.implementations.whisper_stt import WHISPER_SAMPLE_RATE, WhisperSTT
 
 
 class FakeSegment:
@@ -32,7 +32,9 @@ def test_transcribe_bytes_decodes_audio_at_whisper_sample_rate(
         assert sampling_rate == WHISPER_SAMPLE_RATE
         return decoded_audio
 
-    monkeypatch.setattr("app.services.stt.whisper_stt.decode_audio", fake_decode_audio)
+    monkeypatch.setattr(
+        "app.services.stt.implementations.whisper_stt.decode_audio", fake_decode_audio
+    )
     service = WhisperSTT(client=client)  # type: ignore[arg-type]
 
     assert service.transcribe_bytes(b"encoded-audio") == "Hola\nmundo"
@@ -54,7 +56,9 @@ def test_transcribe_file_decodes_mono_audio_at_whisper_sample_rate(
         assert sampling_rate == WHISPER_SAMPLE_RATE
         return decoded_audio
 
-    monkeypatch.setattr("app.services.stt.whisper_stt.decode_audio", fake_decode_audio)
+    monkeypatch.setattr(
+        "app.services.stt.implementations.whisper_stt.decode_audio", fake_decode_audio
+    )
 
     service = WhisperSTT(client=client)  # type: ignore[arg-type]
 

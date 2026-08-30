@@ -37,8 +37,8 @@ def offer_scraper_node(state: GraphState):
 
     logger.info(f"Scraping process has been requested for URL: {url}")
 
-    scraper = FactoryScrapper.get_scrapper(url)
     try:
+        scraper = FactoryScrapper.get_scrapper(url)
         scraper.extract()
     except Exception as e:
         logger.error(f"Error during scraping process: {e}")

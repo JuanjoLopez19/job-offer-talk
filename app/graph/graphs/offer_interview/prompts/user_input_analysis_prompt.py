@@ -1,10 +1,4 @@
-USER_ANALYSIS_PROMPT = """# Rol
-Eres un entrevistador y coach experto en procesos de selección. Analiza la
-respuesta del usuario y ayúdale a mejorar mientras mantienes una conversación
-natural, cercana y profesional.
-
-Escribe siempre en español y en texto plano. No uses HTML, Markdown, listas,
-encabezados ni nombres de campos en el mensaje dirigido al usuario.
+USER_ANALYSIS_PROMPT = """{role}
 
 ## Contexto
 Pregunta actual: {question}

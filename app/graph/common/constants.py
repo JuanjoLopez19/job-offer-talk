@@ -21,6 +21,9 @@ class NodeNames:
     USER_INPUT_ANALYSIS_NODE = "user_input_analysis_node"
     USER_INPUT_ANALYSIS_HITL_NODE = build_hitl_node_name(USER_INPUT_ANALYSIS_NODE)
 
+    ASK_FOR_NEW_QUESTION_NODE = "ask_for_new_question_node"
+    ASK_FOR_NEW_QUESTION_HITL_NODE = build_hitl_node_name(ASK_FOR_NEW_QUESTION_NODE)
+
 
 class GraphStateFields(StrEnum):
     SESSION_ID = "session_id"
@@ -32,3 +35,4 @@ class GraphStateFields(StrEnum):
     JOB_OFFER_GENERATED_INFO = "job_offer_generated_info"
     CONVERSATION_HISTORY = "conversation_history"
     IS_TTS_MESSAGE = "is_tts_message"
+    COUNTER_QUESTIONS = "counter_questions"

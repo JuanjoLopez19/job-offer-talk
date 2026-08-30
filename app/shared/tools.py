@@ -40,3 +40,9 @@ def conversation_history_to_markdown(conversation_history: list[dict[str, Any]])
             for msg in conversation_history
         ]
     )
+
+
+def remove_question_from_list(questions_list: list[str], question: str) -> list[str]:
+    if question in questions_list:
+        questions_list.remove(question)
+    return questions_list

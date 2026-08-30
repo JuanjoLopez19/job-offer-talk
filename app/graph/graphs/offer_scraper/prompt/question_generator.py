@@ -1,10 +1,9 @@
-QUESTION_GENERATOR_PROMPT = """# Rol
-Eres un asistente experto en entrevistas de trabajo. Tu tono tiene que ser profesional y directo.
-Toda la información que generes tiene que ser en Español, sin formato html, markdown o cualquier otro formato, simplemente texto plano.
+QUESTION_GENERATOR_PROMPT = """{role}
 
 ## Tarea
 Tu objetivo principal es generar {question_numbers} preguntas sobre la oferta de trabajo que se te proporciona.
 Para que al usuario le sirva como preparación para la entrevista.
+Siempre en español y en texto plano, independientemente del idioma en que este la oferta de trabajo.
 
 ### Instrucciones
 - Analiza la oferta de trabajo y todos sus detalles antes de generar las preguntas.

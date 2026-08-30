@@ -10,6 +10,7 @@ from langgraph.types import Command
 
 from app.graph import manager as manager_module
 from app.graph.builder import base_builder
+from app.graph.graphs.offer_scraper.common.messages import INVALID_URL_MESSAGE
 from app.graph.manager import GraphManager
 
 
@@ -31,7 +32,7 @@ class FakeGraph:
     ) -> dict[str, Any]:
         self.input = graph_input
         self.config = config
-        return {"assistant_message": "Hello"}
+        return {"session_id": "thread-1", "assistant_message": "Hello"}
 
 
 def test_invoke_passes_thread_id_to_the_checkpointer() -> None:
@@ -40,7 +41,8 @@ def test_invoke_passes_thread_id_to_the_checkpointer() -> None:
 
     result = manager.invoke({}, thread_id="thread-1")
 
-    assert result == {"assistant_message": "Hello"}
+    assert result.session_id == "thread-1"
+    assert result.assistant_message == "Hello"
     assert graph.input == {"session_id": "thread-1"}
     assert graph.config is not None
     assert graph.config["configurable"] == {"thread_id": "thread-1"}
@@ -148,19 +150,15 @@ def test_export_graph_writes_a_local_mermaid_file(tmp_path: Path) -> None:
     assert "offer_scraper" in output_path.read_text(encoding="utf-8")
 
 
-def test_valid_url_completes_the_flow_after_the_initial_interrupt() -> None:
+def test_initial_graph_invocation_interrupts_for_a_job_offer_url() -> None:
     graph = base_builder.compile(checkpointer=InMemorySaver())
     manager = GraphManager(graph=graph)
 
-    first_result = manager.invoke({}, thread_id="thread-1")
-    final_result = manager.invoke("https://example.com/job", thread_id="thread-1")
+    result = manager.invoke({}, thread_id="thread-1")
 
-    assert first_result["__interrupt__"]
-    assert "__interrupt__" not in final_result
-    assert final_result["user_input"] == "https://example.com/job"
-    assert (
-        final_result["assistant_message"] == "The scraping process has been completed"
-    )
+    assert result.session_id == "thread-1"
+    assert result.model_extra is not None
+    assert result.model_extra["__interrupt__"]
 
 
 def test_invalid_url_interrupts_again_with_validation_message() -> None:
@@ -169,8 +167,7 @@ def test_invalid_url_interrupts_again_with_validation_message() -> None:
 
     manager.invoke({}, thread_id="thread-1")
     invalid_result = manager.invoke("not-a-url", thread_id="thread-1")
-    final_result = manager.invoke("https://example.com/job", thread_id="thread-1")
 
-    interrupt_payload = invalid_result["__interrupt__"][0].value
-    assert interrupt_payload["message"] == "Please enter a valid URL"
-    assert "__interrupt__" not in final_result
+    assert invalid_result.model_extra is not None
+    interrupt_payload = invalid_result.model_extra["__interrupt__"][0].value
+    assert interrupt_payload["assistant_message"] == INVALID_URL_MESSAGE

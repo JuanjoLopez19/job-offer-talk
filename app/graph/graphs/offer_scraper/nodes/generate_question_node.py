@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from app.core.logger import get_logger
 from app.graph.common.constants import GraphStateFields, NodeNames
 from app.graph.core.config import GraphState
+from app.graph.graphs.common.prompts.role_prompt import ROLE_PROMPT
 from app.graph.graphs.offer_scraper.common.constants import OfferScraperConstants
 from app.graph.graphs.offer_scraper.common.messages import (
     GENERATE_QUESTION_ERROR_MESSAGE,
@@ -50,6 +51,7 @@ def generate_question_node(state: GraphState):
         structured_model = model.with_structured_output(LLMOutput)
         ai_message = structured_model.invoke(
             QUESTION_GENERATOR_PROMPT.format(
+                role=ROLE_PROMPT,
                 question_numbers=10,
                 job_offer=job_offer_to_markdown(state.job_offer_context),
             )
@@ -70,11 +72,12 @@ def generate_question_node(state: GraphState):
         "assistant", first_question, node_name=NodeNames.GENERATE_QUESTION_NODE
     )
 
+    output.questions = output.questions[1:]
     return {
         GraphStateFields.ASSISTANT_MESSAGE: first_question,
         GraphStateFields.CONVERSATION_HISTORY: conversation_history,
         GraphStateFields.JOB_OFFER_GENERATED_INFO: output.model_dump(),
         GraphStateFields.NODE_NAME: NodeNames.GENERATE_QUESTION_NODE,
         GraphStateFields.CONDITIONAL_EDGE: OfferScraperConstants.GENERATE_QUESTION_SUCCESS_EDGE,
-        GraphStateFields.IS_TTS_MESSAGE: True,
+        GraphStateFields.IS_TTS_MESSAGE: False,
     }
