@@ -25,11 +25,13 @@ class TtsProvider(StrEnum):
 class SttConfig(BaseModel):
     model_name: str = Field("medium")
     device: str = Field("cuda" if torch.cuda.is_available() else "cpu")
+    provider: SttProvider = Field(SttProvider.WHISPER)
 
 
 class TtsConfig(BaseModel):
     voice: str = Field("em_alex")
     device: str = Field("cuda" if torch.cuda.is_available() else "cpu")
+    provider: TtsProvider = Field(TtsProvider.KOKORO)
 
 
 class ReasoningLevel(BaseModel):

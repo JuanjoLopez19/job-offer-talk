@@ -1,3 +1,4 @@
+from app.core.config import Config, SttProvider, TtsProvider
 from app.graph.core.config import GraphState, conversation_history_reducer
 
 
@@ -20,3 +21,10 @@ def test_graph_state_keeps_langgraph_interrupt_metadata() -> None:
     )
 
     assert state.model_extra == {"__interrupt__": [interrupt]}
+
+
+def test_audio_providers_have_local_defaults() -> None:
+    config = Config()
+
+    assert config.stt.provider is SttProvider.WHISPER
+    assert config.tts.provider is TtsProvider.KOKORO

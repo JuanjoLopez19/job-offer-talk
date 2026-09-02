@@ -24,6 +24,12 @@ class FakeGraph:
         interrupts = (object(),) if self.interrupted else ()
         return SimpleNamespace(interrupts=interrupts)
 
+    def get_graph(self) -> "FakeGraph":
+        return self
+
+    def draw_mermaid_png(self) -> bytes:
+        return b"\x89PNG\r\n\x1a\nunit-test"
+
     def invoke(
         self,
         graph_input: Any,
@@ -47,7 +53,7 @@ def test_invoke_passes_thread_id_to_the_checkpointer() -> None:
     assert graph.config is not None
     assert graph.config["configurable"] == {"thread_id": "thread-1"}
     assert graph.config["metadata"] == {"langfuse_session_id": "thread-1"}
-    assert graph.config["run_name"] == "job-offer-talk.graph.invoke"
+    assert graph.config["run_name"] == "JobTalk"
     assert len(graph.config["callbacks"]) == 1
 
 
@@ -82,7 +88,7 @@ def test_invoke_sets_custom_langfuse_trace_attributes(
     assert received == {
         "trace_name": "job-offer-conversation",
         "session_id": "thread-1",
-        "tags": ["job-offer-talk", "langgraph"],
+        "tags": ["JobTalk", "langgraph"],
         "metadata": {
             "environment": manager.config.environment,
             "framework": "langgraph",
@@ -140,14 +146,32 @@ def test_langfuse_client_uses_the_application_configuration(
     assert received["release"] == manager.config.version
 
 
-def test_export_graph_writes_a_local_mermaid_file(tmp_path: Path) -> None:
-    graph = base_builder.compile(checkpointer=InMemorySaver())
-    manager = GraphManager(graph=graph)
+def test_export_graph_writes_a_png_file(tmp_path: Path) -> None:
+    graph = FakeGraph()
+    manager = GraphManager(graph=cast(CompiledStateGraph, graph))
 
-    output_path = manager.export_graph(tmp_path / "graph.mmd")
+    output_path = manager.export_graph(tmp_path / "graph.png")
 
-    assert output_path.read_text(encoding="utf-8").startswith("---")
-    assert "offer_scraper" in output_path.read_text(encoding="utf-8")
+    assert output_path.read_bytes() == b"\x89PNG\r\n\x1a\nunit-test"
+
+
+def test_first_invocation_exports_the_compiled_graph(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    graph = FakeGraph()
+    exported: list[Path | None] = []
+    monkeypatch.setattr(GraphManager, "compile_graph", lambda _: graph)
+
+    def fake_export(manager: GraphManager, path: Path | None = None) -> Path:
+        exported.append(path)
+        return manager.graph_output_path
+
+    monkeypatch.setattr(GraphManager, "export_graph", fake_export)
+    manager = GraphManager()
+
+    manager.invoke({}, thread_id="thread-1")
+
+    assert exported == [None]
 
 
 def test_initial_graph_invocation_interrupts_for_a_job_offer_url() -> None:

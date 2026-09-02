@@ -5,3 +5,10 @@ class OfferInterviewConstants:
     NOT_CORRECT_EDGE = "not_correct_edge"
     NOT_IN_CONTEXT_EDGE = "not_in_context_edge"
     ANALYSIS_ERROR_EDGE = "analysis_error_edge"
+    END_EDGE = "end_edge"
+
+    CONTINUE_EDGE = "continue"
+    REPEAT_EDGE = "repeat"
+
+    MAX_DIALOG_ROUNDS = 7
+    MAX_DIALOG_ROUNDS_ASK_NEW_QUESTION = 2

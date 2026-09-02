@@ -75,8 +75,12 @@ Aplica el siguiente orden y asigna a `next_node` exactamente uno de estos valore
 3. Si es válida, pero le falta contenido importante, claridad, coherencia u
    organización:
    `not_complete_and_coherent_edge`
-4. Si es relevante, válida, suficientemente completa, coherente y bien organizada:
+4. Si es relevante, válida, suficientemente completa, coherente y bien organizada,
+   y hay preguntas disponibles:
    `next_question_edge`
+5. Si cumple las condiciones del punto anterior, pero no hay ninguna pregunta
+   disponible:
+   `end_edge`
 
 No devuelvas ningún otro valor en `next_node`.
 
@@ -109,14 +113,23 @@ Adapta el mensaje al resultado:
   disponibles, y también está prohibido introducir un tema nuevo.
 - `next_question_edge`: reconoce brevemente una fortaleza específica, enlaza con
   una pregunta de la lista de preguntas disponibles y evita repetir la pregunta
-  actual o una equivalente. Si no existe una opción distinta, formula una nueva
-  pregunta relevante para el puesto.
+  actual o una equivalente.
+- `end_edge`: reconoce brevemente una fortaleza específica de la última respuesta,
+  indica con naturalidad que habéis completado todas las preguntas y agradece al
+  candidato su participación. Cierra la entrevista de forma amable y profesional,
+  sin formular ninguna pregunta ni introducir un tema nuevo.
+
+## Campo `question`
+- Si `next_node` es `next_question_edge`, copia exactamente una pregunta de la
+  lista de preguntas disponibles.
+- Para cualquier otro valor de `next_node`, devuelve exactamente la pregunta
+  actual.
 
 ## Campo `reasoning`
 Escribe una justificación breve y específica en español. Indica qué evidencia de
 la respuesta sustenta la clasificación y qué criterio decisivo se ha aplicado.
 Este campo es interno: no lo copies ni lo menciones en `output`.
 
-Genera siempre los tres campos de la salida estructurada: `output`, `next_node` y
-`reasoning`.
+Genera siempre los cuatro campos de la salida estructurada: `output`, `next_node`,
+`reasoning` y `question`.
 """

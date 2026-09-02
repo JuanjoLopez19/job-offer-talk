@@ -21,6 +21,7 @@ def route_after_analysis(
     if state.conditional_edge in [
         OfferInterviewConstants.OFFER_CONTEXT_NOT_FOUND_EDGE,
         OfferInterviewConstants.ANALYSIS_ERROR_EDGE,
+        OfferInterviewConstants.END_EDGE,
     ]:
         return END
 
@@ -40,13 +41,17 @@ def route_after_analysis(
 def route_after_ask_new_question(
     state: GraphState,
 ) -> str:
-    if state.conditional_edge in [
+    if state.conditional_edge == OfferInterviewConstants.CONTINUE_EDGE:
+        return NodeNames.USER_INPUT_ANALYSIS_HITL_NODE
+
+    elif state.conditional_edge in [
         OfferInterviewConstants.OFFER_CONTEXT_NOT_FOUND_EDGE,
         OfferInterviewConstants.ANALYSIS_ERROR_EDGE,
+        END,
     ]:
         return END
 
-    return NodeNames.USER_INPUT_ANALYSIS_HITL_NODE
+    return NodeNames.ASK_FOR_NEW_QUESTION_HITL_NODE
 
 
 def build_offer_interview_subgraph(builder: StateGraph):
@@ -91,5 +96,6 @@ def build_offer_interview_subgraph(builder: StateGraph):
         [
             NodeNames.USER_INPUT_ANALYSIS_HITL_NODE,
             END,
+            NodeNames.ASK_FOR_NEW_QUESTION_HITL_NODE,
         ],
     )

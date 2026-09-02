@@ -1,6 +1,1 @@
-WELCOME_MESSAGE = [
-    "Welcome to <b>Job Talk</b>!",
-    "Here you can practice your job interview skills.",
-    "The only thing you have to do is provide the URL of the job offer and wait",
-    "while the application is being configured",
-]
+WELCOME_MESSAGE = "!Hola! Bienvenido a <b>JobTalk</b>. Soy tu asistente virtual para la entrevista de trabajo. Para empezar, ¿puedes proporcionarme la URL de la oferta de trabajo que deseas analizar?"

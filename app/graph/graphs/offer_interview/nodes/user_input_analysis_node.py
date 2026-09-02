@@ -38,6 +38,8 @@ class LlmOutput(BaseModel):
         OfferInterviewConstants.NOT_IN_CONTEXT_EDGE,
         # pyrefly: ignore [invalid-literal]
         OfferInterviewConstants.NOT_CORRECT_EDGE,
+        # pyrefly: ignore [invalid-literal]
+        OfferInterviewConstants.END_EDGE,
     ] = Field(description="El nombre del nodo siguiente")
     reasoning: str = Field(
         description="El razonamiento de por qué la respuesta es correcta o no es correcta"
@@ -108,6 +110,7 @@ def user_input_analysis_node(state: GraphState):
     if output.next_node in [
         OfferInterviewConstants.NEXT_QUESTION_EDGE,
         OfferInterviewConstants.NOT_CORRECT_EDGE,
+        OfferInterviewConstants.END_EDGE,
     ]:
         assistant_message = output.output
         conversation_history = add_msg_to_conversation_history(
@@ -123,7 +126,10 @@ def user_input_analysis_node(state: GraphState):
     else:
         updates[GraphStateFields.COUNTER_QUESTIONS] = state.counter_questions + 1
 
-        if updates[GraphStateFields.COUNTER_QUESTIONS] >= 2:
+        if (
+            updates[GraphStateFields.COUNTER_QUESTIONS]
+            > OfferInterviewConstants.MAX_DIALOG_ROUNDS
+        ):
             get_logger(__name__).info("Max Counter Reached, generating new message")
             updates[GraphStateFields.COUNTER_QUESTIONS] = 0
             message_prompt = MESSAGE_GENERATOR_PROMPT.format(

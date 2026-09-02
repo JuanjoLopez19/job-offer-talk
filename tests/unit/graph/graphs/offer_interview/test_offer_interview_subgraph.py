@@ -15,6 +15,7 @@ from app.graph.graphs.offer_interview.offer_interview_subgraph import (
     [
         (OfferInterviewConstants.OFFER_CONTEXT_NOT_FOUND_EDGE, END),
         (OfferInterviewConstants.ANALYSIS_ERROR_EDGE, END),
+        (OfferInterviewConstants.END_EDGE, END),
         (
             OfferInterviewConstants.NOT_IN_CONTEXT_EDGE,
             NodeNames.USER_INPUT_ANALYSIS_HITL_NODE,
@@ -47,9 +48,14 @@ def test_route_after_analysis_selects_the_expected_destination(
     [
         (OfferInterviewConstants.OFFER_CONTEXT_NOT_FOUND_EDGE, END),
         (OfferInterviewConstants.ANALYSIS_ERROR_EDGE, END),
+        (END, END),
         (
-            OfferInterviewConstants.NEXT_QUESTION_EDGE,
+            OfferInterviewConstants.CONTINUE_EDGE,
             NodeNames.USER_INPUT_ANALYSIS_HITL_NODE,
+        ),
+        (
+            OfferInterviewConstants.REPEAT_EDGE,
+            NodeNames.ASK_FOR_NEW_QUESTION_HITL_NODE,
         ),
     ],
 )

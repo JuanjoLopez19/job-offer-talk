@@ -21,7 +21,7 @@ class GraphManager:
     graph: CompiledStateGraph | None = None
     config: Config = field(default_factory=Config)
     langfuse: Langfuse = field(init=False)
-    graph_output_path: Path = Path("graph.mmd")
+    graph_output_path: Path = Path("graph.png")
 
     def __post_init__(self) -> None:
         self.langfuse = Langfuse(
@@ -49,7 +49,7 @@ class GraphManager:
         """Write a Mermaid diagram without relying on a remote rendering service."""
         graph = self.__get_graph(export=False)
         output_path = path or self.graph_output_path
-        output_path.write_text(graph.get_graph().draw_mermaid(), encoding="utf-8")
+        output_path.write_bytes(graph.get_graph().draw_mermaid_png())
         return output_path
 
     def __get_graph(self, *, export: bool = True):
@@ -66,18 +66,18 @@ class GraphManager:
         if not thread_id.strip():
             raise ValueError("thread_id cannot be empty")
 
-        graph = self.__get_graph(export=False)
+        graph = self.__get_graph(export=True)
         config = {
             "configurable": {"thread_id": thread_id},
             "callbacks": [self.__get_langfuse_callback()],
             "metadata": {"langfuse_session_id": thread_id},
-            "run_name": "job-offer-talk.graph.invoke",
+            "run_name": "JobTalk",
         }
 
         with propagate_attributes(
             trace_name=self.config.langfuse_trace_name,
             session_id=thread_id,
-            tags=["job-offer-talk", "langgraph"],
+            tags=["JobTalk", "langgraph"],
             metadata={
                 "environment": self.config.environment,
                 "framework": "langgraph",

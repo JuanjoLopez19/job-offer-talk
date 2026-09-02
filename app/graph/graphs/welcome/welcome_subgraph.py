@@ -4,7 +4,7 @@ from langgraph.graph import StateGraph
 
 from app.graph.common.constants import NodeNames
 from app.graph.graphs.common.hitl_node import human_node
-from app.graph.graphs.welcome.start import start_node
+from app.graph.graphs.welcome.nodes.start import start_node
 
 
 def build_welcome_subgraph(builder: StateGraph):

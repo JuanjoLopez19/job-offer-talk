@@ -5,6 +5,6 @@ from app.graph.core.config import GraphState
 
 def start_node(state: GraphState):
     return {
-        GraphStateFields.ASSISTANT_MESSAGE: "\n".join(WELCOME_MESSAGE),
+        GraphStateFields.ASSISTANT_MESSAGE: WELCOME_MESSAGE,
         GraphStateFields.NODE_NAME: NodeNames.INITIAL_NODE,
     }

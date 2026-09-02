@@ -74,6 +74,34 @@ def test_analysis_removes_the_answered_question_after_a_successful_response(
     ]
 
 
+def test_analysis_ends_when_no_questions_remain(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    response = {
+        "output": "Hemos completado todas las preguntas. Gracias por participar.",
+        "next_node": OfferInterviewConstants.END_EDGE,
+        "reasoning": "No quedan preguntas disponibles.",
+        "question": "¿Cómo diseñas una API?",
+    }
+    monkeypatch.setattr(
+        node_module.LLMFactory, "get_llm", lambda **_: FakeLLM(response)
+    )
+    monkeypatch.setattr(
+        node_module,
+        "add_msg_to_conversation_history",
+        lambda role, message, *, node_name: [{"role": role, "content": message}],
+    )
+    state = _state()
+    state.job_offer_generated_info["questions"] = []
+
+    result = user_input_analysis_node(state)
+
+    assert result["conditional_edge"] == OfferInterviewConstants.END_EDGE
+    assert result["counter_questions"] == 0
+    assert "job_offer_generated_info" not in result
+    assert result["assistant_message"] == response["output"]
+
+
 def test_analysis_increments_the_retry_counter_for_an_incomplete_answer(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -99,3 +127,68 @@ def test_analysis_increments_the_retry_counter_for_an_incomplete_answer(
         == OfferInterviewConstants.NOT_COMPLETE_AND_COHERENT_EDGE
     )
     assert result["counter_questions"] == 1
+
+
+def test_analysis_does_not_generate_a_new_question_at_the_retry_limit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    response = {
+        "output": "Amplía los detalles técnicos.",
+        "next_node": OfferInterviewConstants.NOT_COMPLETE_AND_COHERENT_EDGE,
+        "reasoning": "Incomplete",
+        "question": "Q1",
+    }
+    llm_calls: list[dict[str, object]] = []
+
+    def fake_get_llm(**kwargs: object) -> FakeLLM:
+        llm_calls.append(kwargs)
+        return FakeLLM(response)
+
+    monkeypatch.setattr(node_module.LLMFactory, "get_llm", fake_get_llm)
+    monkeypatch.setattr(
+        node_module,
+        "add_msg_to_conversation_history",
+        lambda role, message, *, node_name: [{"role": role, "content": message}],
+    )
+    state = _state()
+    state.counter_questions = OfferInterviewConstants.MAX_DIALOG_ROUNDS - 1
+
+    result = user_input_analysis_node(state)
+
+    assert result["counter_questions"] == OfferInterviewConstants.MAX_DIALOG_ROUNDS
+    assert result["assistant_message"] == response["output"]
+    assert len(llm_calls) == 1
+
+
+def test_analysis_generates_a_new_question_after_the_retry_limit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    analysis_response = {
+        "output": "Amplía los detalles técnicos.",
+        "next_node": OfferInterviewConstants.NOT_COMPLETE_AND_COHERENT_EDGE,
+        "reasoning": "Incomplete",
+        "question": "Q1",
+    }
+    generated_response = {
+        "output": "Gracias. Continuemos con Q2.",
+        "question": "Q2",
+    }
+    responses = iter([analysis_response, generated_response])
+    monkeypatch.setattr(
+        node_module.LLMFactory,
+        "get_llm",
+        lambda **_: FakeLLM(next(responses)),
+    )
+    monkeypatch.setattr(
+        node_module,
+        "add_msg_to_conversation_history",
+        lambda role, message, *, node_name: [{"role": role, "content": message}],
+    )
+    state = _state()
+    state.counter_questions = OfferInterviewConstants.MAX_DIALOG_ROUNDS
+
+    result = user_input_analysis_node(state)
+
+    assert result["counter_questions"] == 0
+    assert result["assistant_message"] == generated_response["output"]
+    assert result["job_offer_generated_info"]["questions"] == ["Q1"]
