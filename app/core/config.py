@@ -1,7 +1,7 @@
 from enum import StrEnum
 
 import torch
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -51,6 +51,10 @@ class ReasoningLevels(BaseModel):
     high: ReasoningLevel
 
 
+class RedisConfig(BaseModel):
+    url: RedisDsn
+
+
 class Config(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env", ".env.local"),
@@ -62,6 +66,7 @@ class Config(BaseSettings):
 
     stt: SttConfig
     tts: TtsConfig
+    redis: RedisConfig
 
     langfuse_secret_key: str
     langfuse_public_key: str

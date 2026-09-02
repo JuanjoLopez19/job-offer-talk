@@ -37,7 +37,7 @@ class GraphManager:
         return base_builder.compile(checkpointer=self.checkpointer)
 
     def __get_checkpointer(self):
-        client = Redis(host="localhost", port=6379, decode_responses=False)
+        client = Redis.from_url(url=str(self.config.redis.url), decode_responses=False)
         saver = InterruptAwareRedisSaver(
             redis_client=client,
             ttl={"default_ttl": 3600},

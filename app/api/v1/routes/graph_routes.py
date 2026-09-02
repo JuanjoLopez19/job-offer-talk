@@ -1,4 +1,4 @@
-from typing import Annotated, Any
+from typing import Annotated
 from uuid import uuid4
 
 from fastapi import APIRouter, Body, Header, Request, Response
@@ -8,7 +8,7 @@ from app.api.v1.connection_manager import connection_manager
 from app.graph.core.config import GraphState
 from app.graph.manager import GraphManager
 from app.services.tts.common.base import BaseTTS
-from app.shared.models import GraphInput
+from app.shared.models import GraphInput, GraphOutput
 
 graph_router = APIRouter(tags=["Graph"])
 
@@ -22,7 +22,7 @@ async def get_graph(
     request: Request,
     response: Response,
     thread_id: Annotated[str | None, Header(alias=THREAD_ID_HEADER)] = None,
-) -> Any:
+) -> GraphOutput:
     if isinstance(graph_input, GraphInput):
         resolved_thread_id = thread_id or graph_input.session_id
     else:
@@ -43,4 +43,4 @@ async def get_graph(
             result.session_id, result.assistant_message, audio
         )
 
-    return result
+    return GraphOutput.model_validate(result.model_dump())
