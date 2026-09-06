@@ -66,7 +66,7 @@ class GraphManager:
         if not thread_id.strip():
             raise ValueError("thread_id cannot be empty")
 
-        graph = self.__get_graph(export=True)
+        graph = self.__get_graph(export=False)
         config = {
             "configurable": {"thread_id": thread_id},
             "callbacks": [self.__get_langfuse_callback()],

@@ -1,0 +1,15 @@
+{
+  "name": "jobtalk-workspace",
+  "private": true,
+  "packageManager": "pnpm@12.3.4",
+  "scripts": {
+    "build": "pnpm --dir frontend build",
+    "check": "pnpm --dir frontend check",
+    "dev:frontend": "pnpm --dir frontend dev",
+    "prepare": "husky",
+    "test:frontend": "pnpm --dir frontend test"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

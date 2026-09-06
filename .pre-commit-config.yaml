@@ -13,3 +13,9 @@ repos:
         language: system
         files: ^app/
         pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: uv run pytest
+        language: system
+        files: ^(app|tests)/
+        pass_filenames: false

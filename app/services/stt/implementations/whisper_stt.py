@@ -8,6 +8,7 @@ import torch
 from faster_whisper import WhisperModel
 from faster_whisper.audio import decode_audio
 
+from app.core.logger import get_logger
 from app.services.stt.common.base import BaseSTT
 
 WHISPER_SAMPLE_RATE = 16_000
@@ -23,6 +24,9 @@ class WhisperSTT(BaseSTT):
             selected_device = "cuda" if torch.cuda.is_available() else "cpu"
 
         self.client = WhisperModel(model_name, device=selected_device)
+        get_logger(__name__).info(
+            f"Loaded Whisper model {model_name} on device {selected_device} successfully"
+        )
 
     def transcribe(self, audio: np.ndarray) -> str:
         if self.client is None:

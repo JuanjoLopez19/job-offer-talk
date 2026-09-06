@@ -16,7 +16,7 @@ graph_manager = GraphManager()
 THREAD_ID_HEADER = "X-Thread-ID"
 
 
-@graph_router.post("/")
+@graph_router.post("/", response_model_exclude_defaults=True)
 async def get_graph(
     graph_input: Annotated[GraphInput | str, Body()],
     request: Request,
@@ -28,7 +28,11 @@ async def get_graph(
     else:
         resolved_thread_id = thread_id or str(uuid4())
 
-    result = graph_manager.invoke(graph_input, thread_id=resolved_thread_id)
+    result = await run_in_threadpool(
+        graph_manager.invoke,
+        graph_input,
+        thread_id=resolved_thread_id,
+    )
     response.headers[THREAD_ID_HEADER] = resolved_thread_id
 
     if (
@@ -43,4 +47,5 @@ async def get_graph(
             result.session_id, result.assistant_message, audio
         )
 
-    return GraphOutput.model_validate(result.model_dump())
+    result_data = result.model_dump() if isinstance(result, GraphState) else result
+    return GraphOutput.model_validate(result_data)

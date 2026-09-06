@@ -1,4 +1,4 @@
-# Job Offer Talk
+# JobTalk
 
 Asistente conversacional para preparar entrevistas a partir de una oferta de
 empleo. La aplicación extrae la información de una oferta, genera preguntas
@@ -15,6 +15,8 @@ sesión.
 - Trazabilidad de ejecuciones con Langfuse.
 - Soporte para Google Gemini, OpenAI, Anthropic y modelos locales con Ollama.
 - API construida con FastAPI.
+- Interfaz React responsive con temas claro y oscuro.
+- Un único servicio en producción: FastAPI sirve la API y el frontend compilado.
 
 ## Arquitectura del flujo
 
@@ -26,7 +28,7 @@ reanundan usando el mismo identificador de sesión.
 El archivo `graph.png` contiene siempre la representación actual del flujo y se
 actualiza automáticamente cuando se compila e invoca el grafo.
 
-![Grafo de estados de Job Offer Talk](graph.png)
+![Grafo de estados de JobTalk](graph.png)
 
 ## Requisitos
 
@@ -35,6 +37,7 @@ actualiza automáticamente cuando se compila e invoca el grafo.
 - Redis disponible en `localhost:6379`.
 - Credenciales de Langfuse.
 - Un proveedor de LLM configurado.
+- Node.js y pnpm para compilar el frontend.
 
 El procesamiento de voz usa Faster Whisper para STT y Kokoro para TTS. Ambos
 pueden utilizar CPU o CUDA según la configuración.
@@ -51,13 +54,19 @@ pueden utilizar CPU o CUDA según la configuración.
    # También están disponibles: ollama, openai, anthropic y all
    ```
 
-3. Copia el archivo de configuración de ejemplo:
+3. Instala las dependencias del frontend. Este paso también configura Husky:
+
+   ```powershell
+   pnpm install
+   ```
+
+4. Copia el archivo de configuración de ejemplo:
 
    ```powershell
    Copy-Item .env.example .env
    ```
 
-4. Completa en `.env` las credenciales de Langfuse y la configuración de STT y
+5. Completa en `.env` las credenciales de Langfuse y la configuración de STT y
    TTS. Guarda las claves privadas del proveedor en `.env.local`, que tiene
    prioridad sobre `.env` y está excluido de Git.
 
@@ -79,14 +88,28 @@ Para cambiar de proveedor, instala su extra y establece `LLM_PROVIDER` como
 
 ## Ejecución
 
-Arranca Redis y después inicia la API en modo desarrollo:
+Compila React, arranca Redis y después inicia FastAPI:
 
 ```powershell
+pnpm build
 uv run fastapi dev app/app.py
 ```
 
-FastAPI expone la documentación interactiva en
-`http://127.0.0.1:8000/docs`.
+FastAPI sirve la landing en `http://127.0.0.1:8000/`, la entrevista en
+`http://127.0.0.1:8000/entrevista` y la documentación de la API en
+`http://127.0.0.1:8000/docs`. En producción solo se ejecuta FastAPI; Node se usa
+exclusivamente durante la compilación.
+
+Para trabajar en el frontend con recarga automática, ejecuta FastAPI y Vite en
+terminales distintas. Vite redirige las llamadas HTTP y WebSocket a FastAPI:
+
+```powershell
+uv run fastapi dev app/app.py
+pnpm dev:frontend
+```
+
+El servidor de Vite es solo para desarrollo; la entrega final continúa siendo un
+único servicio FastAPI.
 
 ### Iniciar una conversación
 
@@ -117,13 +140,19 @@ uv run ruff format .
 uv run ruff check .
 uv run pyrefly check
 uv run pytest
+pnpm check
+pnpm test:frontend
+pnpm build
 ```
 
-Para instalar y ejecutar todos los hooks del repositorio:
+`pnpm install` configura Husky. El hook ejecuta pre-commit para Python y Biome,
+Vitest y TypeScript para el frontend. Para lanzar todas las comprobaciones a mano:
 
 ```powershell
-uv run pre-commit install
 uv run pre-commit run --all-files
+pnpm check
+pnpm test:frontend
+pnpm build
 ```
 
 ## Estructura del proyecto
@@ -135,6 +164,11 @@ app/
 ├── graph/           # Estado, persistencia, subgrafos y nodos de LangGraph
 ├── services/        # Proveedores de LLM, STT y TTS
 └── shared/          # Modelos compartidos
+frontend/
+├── src/components/  # Componentes de interfaz reutilizables
+├── src/features/    # Tema, conversación, voz y cliente API
+├── src/pages/       # Landing y entrevista
+└── dist/            # Build generado y servido por FastAPI
 tests/unit/           # Pruebas unitarias con la misma estructura que app/
 graph.png             # Diagrama actualizado del grafo
 ```

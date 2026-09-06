@@ -221,3 +221,9 @@ __marimo__/
 
 samples/
 *.wav
+
+# Frontend build and package manager artifacts
+frontend/dist/
+node_modules/
+
+.pnpm-store
