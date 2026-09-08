@@ -47,6 +47,7 @@ jobs:
 
       - name: Build static frontend
         env:
+          VITE_BASE_PATH: "/"
           VITE_GITHUB_PAGES: "true"
           VITE_GITHUB_REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
         run: pnpm build

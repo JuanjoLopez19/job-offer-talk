@@ -4,10 +4,9 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, ".", "");
-  const isGitHubPages = env.VITE_GITHUB_PAGES === "true";
 
   return {
-    base: isGitHubPages ? "/job-offer-talk/" : "/",
+    base: env.VITE_BASE_PATH || "/",
     plugins: [react()],
     server: {
       port: 5173,
