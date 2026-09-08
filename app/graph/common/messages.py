@@ -1,0 +1,1 @@
+WELCOME_MESSAGE = "!Hola! Bienvenido a <b>JobTalk</b>. Soy tu asistente virtual para la entrevista de trabajo. Para empezar, ¿puedes proporcionarme la URL de la oferta de trabajo que deseas analizar?"

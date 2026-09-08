@@ -1,0 +1,1548 @@
+{
+  "version": "2.17",
+  "children": [
+    {
+      "type": "frame",
+      "id": "Kwrze",
+      "x": 0,
+      "y": 0,
+      "name": "Component / Primary Button",
+      "reusable": true,
+      "fill": "$ink",
+      "cornerRadius": 4,
+      "gap": 8,
+      "padding": [
+        4,
+        20
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "PzQbb",
+          "name": "Button Label",
+          "fill": "$on-dark",
+          "content": "Abrir entrevista",
+          "lineHeight": 2,
+          "fontFamily": "$font-mono",
+          "fontSize": 16,
+          "fontWeight": "500"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ofHCY",
+      "x": 260,
+      "y": 0,
+      "name": "Component / Secondary Button",
+      "reusable": true,
+      "fill": "$canvas",
+      "cornerRadius": 4,
+      "stroke": "$hairline-strong",
+      "strokeWidth": 1,
+      "gap": 8,
+      "padding": [
+        4,
+        20
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "dBLBL",
+          "name": "Secondary Button Label",
+          "fill": "$ink",
+          "content": "Ver flujo",
+          "lineHeight": 2,
+          "fontFamily": "$font-mono",
+          "fontSize": 16,
+          "fontWeight": "500"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "npB2q",
+      "x": 520,
+      "y": 0,
+      "name": "Component / Chat Message",
+      "reusable": true,
+      "width": 360,
+      "fill": "$surface-soft",
+      "cornerRadius": 4,
+      "stroke": "$hairline",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 6,
+      "padding": [
+        12,
+        14
+      ],
+      "children": [
+        {
+          "type": "text",
+          "id": "LBjbE",
+          "name": "Message Role",
+          "fill": "$mute",
+          "content": "sistema",
+          "lineHeight": 1.5,
+          "fontFamily": "$font-mono",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "QykIR",
+          "name": "Message Body",
+          "fill": "$body",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Mensaje del asistente",
+          "lineHeight": 1.5,
+          "fontFamily": "$font-mono",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "hq1R3",
+      "x": 520,
+      "y": 171,
+      "name": "Vista 1 / Landing Job Offer Talk",
+      "clip": true,
+      "width": 1440,
+      "height": 1540,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "iiFiz",
+          "name": "Landing Nav",
+          "width": "fill_container",
+          "height": 64,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            72
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "k7jYDK",
+              "name": "ASCII Wordmark",
+              "fill": "$ink",
+              "content": "[ job_offer_talk ]",
+              "lineHeight": 1.2,
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "d2TT3I",
+              "name": "Landing Nav Links",
+              "gap": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "z3uxMY",
+                  "name": "Nav Link / Producto",
+                  "fill": "$body",
+                  "content": "Producto",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "lnrsb",
+                  "name": "Nav Link / Flujo",
+                  "fill": "$body",
+                  "content": "Flujo",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Om2zy",
+                  "name": "Nav Link / Voz",
+                  "fill": "$body",
+                  "content": "Voz",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "uRF40",
+                  "name": "Nav Link / API",
+                  "fill": "$body",
+                  "content": "API",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "id": "gCpVE",
+              "type": "ref",
+              "ref": "Kwrze",
+              "name": "Nav CTA",
+              "descendants": {
+                "PzQbb": {
+                  "content": "Probar ahora"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eyMHb",
+          "name": "Landing Hero Wrap",
+          "width": 1100,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            72,
+            0,
+            0,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "CCJyQ",
+              "name": "Hero Badge",
+              "fill": "$surface-dark",
+              "cornerRadius": 4,
+              "gap": 10,
+              "padding": [
+                2,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XwpbA",
+                  "name": "Hero Badge Text",
+                  "fill": "$on-dark",
+                  "content": "[beta] entrevistas desde una URL",
+                  "lineHeight": 2,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "D65zw9",
+              "name": "Hero Headline",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": 900,
+              "content": "Practica tu entrevista con un asistente que entiende la oferta de trabajo",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "$font-mono",
+              "fontSize": 38,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "c8mpFP",
+              "name": "Hero Subhead",
+              "fill": "$body",
+              "textGrowth": "fixed-width",
+              "width": 760,
+              "content": "Job Offer Talk extrae los requisitos de una vacante, genera preguntas relevantes y conduce una simulacion conversacional con memoria de sesion, checkpoints y soporte de voz.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "ztEkl",
+              "name": "Hero CTA Row",
+              "gap": 12,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "kK9o7",
+                  "type": "ref",
+                  "ref": "Kwrze",
+                  "name": "Hero Primary CTA",
+                  "descendants": {
+                    "PzQbb": {
+                      "content": "Abrir entrevista"
+                    }
+                  }
+                },
+                {
+                  "id": "bWqXT",
+                  "type": "ref",
+                  "ref": "ofHCY",
+                  "name": "Hero Secondary CTA",
+                  "descendants": {
+                    "dBLBL": {
+                      "content": "Ver arquitectura"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WCTbC",
+              "name": "Hero Chat TUI Mockup",
+              "clip": true,
+              "width": 1100,
+              "height": 360,
+              "fill": "$surface-dark",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": [
+                40,
+                48
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "T1z1D",
+                  "name": "TUI ASCII Title",
+                  "fill": "$on-dark",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JOB OFFER TALK\n[ entrevista guiada ]",
+                  "lineHeight": 1.1,
+                  "textAlign": "center",
+                  "fontFamily": "$font-mono",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "ia6kW",
+                  "name": "TUI Prompt Row",
+                  "width": "fill_container",
+                  "fill": "$surface-dark-elevated",
+                  "cornerRadius": 4,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gjwTZ",
+                      "name": "TUI Command",
+                      "fill": "$on-dark",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "| Analiza https://empresa.com/jobs/backend-ai y prepara una entrevista tecnica",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nMmJx",
+                      "name": "TUI Status",
+                      "fill": "$ash",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "modelo: gemini  ·  session_id: candidato-042  ·  voz: disponible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zlJdV",
+                  "name": "TUI Output Columns",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "I2bWLL",
+                      "name": "Terminal Fact / [+] oferta",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "r79fTI",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[+] oferta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "f3qUMO",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "stack detectado: Python, FastAPI, LangGraph",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gPoQ2",
+                      "name": "Terminal Fact / [+] preguntas",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gRzGc",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[+] preguntas",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "LiAlz",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "8 preguntas adaptadas al seniority",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w8Zl9",
+                      "name": "Terminal Fact / [x] checkpoints",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "IR8Cp",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[x] checkpoints",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "dqA8b",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "reanuda el turno exacto tras cada respuesta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yiGkb",
+          "name": "Landing Content Sections",
+          "width": 960,
+          "layout": "vertical",
+          "gap": 80,
+          "padding": [
+            96,
+            0,
+            0,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "zyo6W",
+              "name": "Section / What It Does",
+              "width": "fill_container",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "D9qbj",
+                  "name": "What It Does Title",
+                  "fill": "$ink",
+                  "content": "[+] Que hace el producto",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Mdmx0",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Extrae la oferta    Convierte una URL en requisitos, responsabilidades y tecnologias clave.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "D6Djq",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Genera preguntas    Prepara una entrevista alineada con el rol, no un cuestionario generico.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "hQKCz",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Mantiene contexto    Usa thread IDs, checkpoints y reanudacion para seguir turno a turno.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Nv9gq",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Integra voz        El candidato puede contestar hablando cuando el modo de voz este activo.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tcBY7",
+              "name": "Section / Interview Flow",
+              "width": "fill_container",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "AsGnq",
+                  "name": "Flow Title",
+                  "fill": "$ink",
+                  "content": "[+] Flujo de uso",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "l9lb62",
+                  "name": "Flow Steps Row",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j3nQay",
+                      "name": "Flow Step / 01",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kGDuB",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[01]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SpR0K",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Pega la URL de la oferta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "f0A49",
+                      "name": "Flow Step / 02",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "i4etmA",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[02]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vQEhz",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Confirma los datos extraidos",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NpuuL",
+                      "name": "Flow Step / 03",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oQa6L",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[03]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "m8g0v",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Responde pregunta a pregunta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "y2CTw",
+                      "name": "Flow Step / 04",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NL5cG",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[04]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "N7bCw",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Recibe feedback accionable",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yoIa8",
+          "name": "Landing Footer",
+          "width": 960,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "top": 1
+          },
+          "padding": [
+            64,
+            0,
+            32,
+            0
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "QFKJ1",
+              "name": "Footer Copyright",
+              "fill": "$mute",
+              "content": "©2026 Job Offer Talk",
+              "lineHeight": 2,
+              "fontFamily": "$font-mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "iihJu",
+              "name": "Footer Links",
+              "fill": "$mute",
+              "content": "Docs · API · Privacidad",
+              "lineHeight": 2,
+              "fontFamily": "$font-mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "j9mraq",
+      "x": 2056,
+      "y": 171,
+      "name": "Vista 2 / Chat Job Offer Talk",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "K1C1N",
+          "name": "Chat Top Bar",
+          "width": "fill_container",
+          "height": 64,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            28
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ByFsT",
+              "name": "Chat Product Label",
+              "fill": "$ink",
+              "content": "[ job_offer_talk / entrevista ]",
+              "lineHeight": 1.5,
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Q2fdE5",
+              "name": "Chat Runtime Status",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "K1Mp8n",
+                  "name": "Status Dot",
+                  "fill": "$success",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "w5DBn",
+                  "name": "Status Text",
+                  "fill": "$mute",
+                  "content": "sesion activa · voz disponible",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fSAXh",
+          "name": "Chat Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "qqXCl",
+              "name": "Chat Sidebar",
+              "width": 304,
+              "height": "fill_container",
+              "fill": "$surface-soft",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "right": 1
+              },
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                24,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U23Z3",
+                  "name": "New Interview Button",
+                  "width": "fill_container",
+                  "fill": "$ink",
+                  "cornerRadius": 4,
+                  "gap": 8,
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OqEPR",
+                      "name": "New Interview Plus",
+                      "fill": "$on-dark",
+                      "content": "[+]",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "z4dhl",
+                      "name": "New Interview Label",
+                      "fill": "$on-dark",
+                      "content": "nueva entrevista",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "xFDEW",
+                  "name": "Sidebar Section Title",
+                  "fill": "$ink",
+                  "content": "historial",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "ZZmFw",
+                  "name": "History Item / Backend AI Engineer",
+                  "width": "fill_container",
+                  "fill": "$canvas",
+                  "cornerRadius": 4,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uwrpO",
+                      "name": "History Title",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Backend AI Engineer",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "f935tP",
+                      "name": "History Meta",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "en progreso",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "EsOpI",
+                  "name": "History Item / Data Platform Lead",
+                  "width": "fill_container",
+                  "fill": "$canvas",
+                  "cornerRadius": 4,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tjWtO",
+                      "name": "History Title",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Data Platform Lead",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "l1Dc1y",
+                      "name": "History Meta",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "feedback listo",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RJsLt",
+                  "name": "History Item / Frontend Staff",
+                  "width": "fill_container",
+                  "fill": "$canvas",
+                  "cornerRadius": 4,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KGSj7",
+                      "name": "History Title",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Frontend Staff",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "smVMM",
+                      "name": "History Meta",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "pendiente URL",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "HwW2g",
+                  "name": "Sidebar Hint",
+                  "fill": "$mute",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "No se admiten imagenes. La entrevista usa texto y entrada por voz cuando el microfono esta activo.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YfENc",
+              "name": "Conversation Workspace",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$canvas",
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cdfXr",
+                  "name": "Conversation Header",
+                  "width": 860,
+                  "stroke": "$hairline",
+                  "strokeWidth": {
+                    "bottom": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    28,
+                    0,
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A8vkWm",
+                      "name": "Conversation Job Title",
+                      "fill": "$ink",
+                      "content": "Backend AI Engineer · simulacion tecnica",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ybBSa",
+                      "name": "Conversation Job Meta",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "fuente: oferta extraida · preguntas adaptadas · turno 4 de 8",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yVMmX",
+                  "name": "Messages Panel",
+                  "width": 860,
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    28,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z912NA",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "NUoiB",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "He analizado la oferta. El rol prioriza FastAPI, LangGraph, Redis y observabilidad con Langfuse. Empezamos por arquitectura."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "g1QxGB",
+                      "name": "Message Row / user",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "id": "E76v8T",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / user",
+                          "width": 640,
+                          "fill": "$surface-card",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "tu"
+                            },
+                            "QykIR": {
+                              "content": "Perfecto, quiero practicar respuestas tecnicas pero tambien explicar decisiones de producto."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dZhvV",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "x6FJz",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "Pregunta 1: describe como diseniarias el flujo para pausar una entrevista, guardar estado y reanudarla con el mismo session_id."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "A3usj5",
+                      "name": "Message Row / user",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "id": "seKsl",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / user",
+                          "width": 640,
+                          "fill": "$surface-card",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "tu"
+                            },
+                            "QykIR": {
+                              "content": "Usaria un grafo con checkpoints en Redis y un thread_id estable. Cada respuesta reanuda desde la interrupcion pendiente."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BG70p",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "AyvVq",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "Bien. Ahora concreta que informacion guardarias en el estado y que no persistirias por seguridad."
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UlqdT",
+                  "name": "Input Dock",
+                  "width": 860,
+                  "stroke": "$hairline",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    0,
+                    28,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "jMsNi",
+                      "name": "Text Input Row",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "z5atV",
+                          "name": "Input Placeholder",
+                          "fill": "$mute",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Escribe tu respuesta o pulsa el microfono para hablar...",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "m6snv",
+                          "name": "Microphone Button",
+                          "width": 40,
+                          "height": 40,
+                          "fill": "$canvas",
+                          "cornerRadius": 4,
+                          "stroke": "$hairline-strong",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "NjrYt",
+                              "name": "Microphone Icon",
+                              "width": 18,
+                              "height": 18,
+                              "icon": "mic",
+                              "library": "lucide",
+                              "fill": "$ink"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "U22yE9",
+                          "name": "Send Button",
+                          "width": 84,
+                          "height": 40,
+                          "fill": "$ink",
+                          "cornerRadius": 4,
+                          "gap": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gJQXZ",
+                              "name": "Send Label",
+                              "fill": "$on-dark",
+                              "content": "Enviar",
+                              "lineHeight": 1.5,
+                              "fontFamily": "$font-mono",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "CvsNn",
+                      "name": "Input Helper Text",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Solo texto y voz. El microfono transcribe la respuesta antes de enviarla.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "canvas": {
+      "type": "color",
+      "value": "#FDFCFC"
+    },
+    "ink": {
+      "type": "color",
+      "value": "#201D1D"
+    },
+    "ink-deep": {
+      "type": "color",
+      "value": "#0F0000"
+    },
+    "body": {
+      "type": "color",
+      "value": "#424245"
+    },
+    "mute": {
+      "type": "color",
+      "value": "#646262"
+    },
+    "ash": {
+      "type": "color",
+      "value": "#9A9898"
+    },
+    "surface-soft": {
+      "type": "color",
+      "value": "#F8F7F7"
+    },
+    "surface-card": {
+      "type": "color",
+      "value": "#F1EEEE"
+    },
+    "surface-dark": {
+      "type": "color",
+      "value": "#201D1D"
+    },
+    "surface-dark-elevated": {
+      "type": "color",
+      "value": "#302C2C"
+    },
+    "hairline": {
+      "type": "color",
+      "value": "#0F00001F"
+    },
+    "hairline-strong": {
+      "type": "color",
+      "value": "#646262"
+    },
+    "accent": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "success": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "warning": {
+      "type": "color",
+      "value": "#FF9F0A"
+    },
+    "danger": {
+      "type": "color",
+      "value": "#FF3B30"
+    },
+    "on-dark": {
+      "type": "color",
+      "value": "#FDFCFC"
+    },
+    "font-mono": {
+      "type": "string",
+      "value": "IBM Plex Mono"
+    },
+    "gap-sm": {
+      "type": "number",
+      "value": 8
+    },
+    "gap-md": {
+      "type": "number",
+      "value": 12
+    },
+    "gap-lg": {
+      "type": "number",
+      "value": 16
+    },
+    "gap-xl": {
+      "type": "number",
+      "value": 24
+    },
+    "gap-xxl": {
+      "type": "number",
+      "value": 32
+    }
+  },
+  "fileToken": "709cf848-ad1f-4d14-830e-9b44b0d2ccd0"
+}

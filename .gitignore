@@ -149,6 +149,7 @@ activemq-data/
 
 # Environments
 .env
+.env.local
 .envrc
 .venv
 env/
@@ -205,6 +206,7 @@ tempCodeRunnerFile.py
 
 # Ruff stuff:
 .ruff_cache/
+.pre-commit-cache/
 
 # PyPI configuration file
 .pypirc
@@ -216,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+samples/
+*.wav
+
+# Frontend build and package manager artifacts
+frontend/dist/
+node_modules/
+*.tsbuildinfo
+
+.pnpm-store
