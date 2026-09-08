@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { InterviewCta } from "../components/layout/InterviewCta";
 import { SiteHeader } from "../components/layout/SiteHeader";
 
 const benefits = [
@@ -30,9 +31,9 @@ export function LandingPage() {
             feedback accionable y soporte de voz.
           </p>
           <div className="hero__actions">
-            <Link className="button button--primary" to="/interview">
+            <InterviewCta className="button button--primary">
               Abrir entrevista <ArrowRight aria-hidden="true" />
-            </Link>
+            </InterviewCta>
             <a className="button button--secondary" href="#flujo">
               Ver cómo funciona
             </a>
@@ -102,9 +103,7 @@ export function LandingPage() {
             <span>[+] voz opcional</span>
             <h2>Escribe cuando quieras. Habla cuando te resulte natural.</h2>
           </div>
-          <Link className="button button--primary" to="/interview">
-            Empezar práctica
-          </Link>
+          <InterviewCta className="button button--primary">Empezar práctica</InterviewCta>
         </section>
       </main>
       <footer>

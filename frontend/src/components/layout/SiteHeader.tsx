@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "../ui/ThemeToggle";
+import { InterviewCta } from "./InterviewCta";
 
 export function SiteHeader() {
   return (
@@ -14,9 +15,7 @@ export function SiteHeader() {
       </nav>
       <div className="site-header__actions">
         <ThemeToggle />
-        <Link className="button button--primary" to="/interview">
-          Probar ahora
-        </Link>
+        <InterviewCta className="button button--primary">Probar ahora</InterviewCta>
       </div>
     </header>
   );
