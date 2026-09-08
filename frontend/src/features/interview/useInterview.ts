@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { replyToInterview, startInterview } from "./api";
 import type { ChatMessage, JobOfferContext, JobOfferGeneratedInfo } from "./types";
+import { useInterviewWebSocket } from "./useInterviewWs";
 import { isValidOfferUrl } from "./validation";
 
 function message(role: ChatMessage["role"], content: string): ChatMessage {
@@ -17,6 +18,19 @@ export function useInterview() {
   const [isAwaitingOfferUrl, setAwaitingOfferUrl] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const generation = useRef(0);
+
+  const onUserTranscript = useCallback((text: string) => {
+    setMessages((current) => [...current, message("user", text)]);
+  }, []);
+
+  const onAssistantMessage = useCallback((text: string) => {
+    setMessages((current) => [...current, message("assistant", text)]);
+  }, []);
+
+  const { status: socketStatus, sendVoice } = useInterviewWebSocket(sessionId, {
+    onUserTranscript,
+    onAssistantMessage,
+  });
 
   useEffect(() => {
     const currentGeneration = ++generation.current;
@@ -78,6 +92,26 @@ export function useInterview() {
     [isAwaitingOfferUrl, isLoading, sessionId],
   );
 
+  const sendVoiceReply = useCallback(
+    async (audio: Blob) => {
+      if (isLoading) return false;
+      const currentGeneration = generation.current;
+      setLoading(true);
+      setError(null);
+      try {
+        await sendVoice(audio);
+        return generation.current === currentGeneration;
+      } catch (caught) {
+        if (generation.current !== currentGeneration) return false;
+        setError(caught instanceof Error ? caught.message : "No se pudo enviar el audio");
+        return false;
+      } finally {
+        if (generation.current === currentGeneration) setLoading(false);
+      }
+    },
+    [isLoading, sendVoice],
+  );
+
   const resetInterview = () => {
     generation.current += 1;
     setSessionId(crypto.randomUUID());
@@ -98,6 +132,8 @@ export function useInterview() {
     isAwaitingOfferUrl,
     error,
     send,
+    sendVoice: sendVoiceReply,
+    socketStatus,
     reset: () => resetInterview(),
   };
 }

@@ -62,10 +62,12 @@ export function InterviewPage() {
           ) : null}
           <MessageList messages={interview.messages} isLoading={interview.isLoading} />
           <Composer
+            key={interview.sessionId}
             disabled={interview.isLoading}
+            voiceDisabled={interview.socketStatus !== "open"}
             mode={interview.isAwaitingOfferUrl ? "offer-url" : "answer"}
-            sessionId={interview.sessionId}
             onSend={interview.send}
+            onVoice={interview.sendVoice}
           />
         </main>
       </div>

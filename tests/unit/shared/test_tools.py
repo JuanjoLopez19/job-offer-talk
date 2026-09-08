@@ -2,9 +2,11 @@ from datetime import datetime
 
 from job_offer_scraper_mcp.shared.constants import JobOfferInfo
 
+from app.graph.core.config import GraphState
 from app.shared.tools import (
     add_msg_to_conversation_history,
     conversation_history_to_markdown,
+    is_tts_response,
     job_offer_to_markdown,
     remove_question_from_list,
 )
@@ -59,4 +61,22 @@ def test_remove_question_from_list_removes_only_the_requested_question() -> None
     result = remove_question_from_list(questions, "Pregunta 1")
 
     assert result == ["Pregunta 2"]
+    assert questions == ["Pregunta 1", "Pregunta 2"]
     assert remove_question_from_list(result, "missing") == ["Pregunta 2"]
+
+
+def test_tts_decision_depends_only_on_graph_output() -> None:
+    assert is_tts_response(
+        GraphState(
+            session_id="session-1",
+            assistant_message="Pregunta",
+            is_tts_message=True,
+        )
+    )
+    assert not is_tts_response(
+        GraphState(
+            session_id="session-1",
+            assistant_message=None,
+            is_tts_message=True,
+        )
+    )

@@ -64,11 +64,13 @@ def test_analysis_removes_the_answered_question_after_a_successful_response(
         lambda role, message, *, node_name: [{"role": role, "content": message}],
     )
 
-    result = user_input_analysis_node(_state())
+    state = _state()
+    result = user_input_analysis_node(state)
 
     assert result["conditional_edge"] == OfferInterviewConstants.NEXT_QUESTION_EDGE
     assert result["counter_questions"] == 0
     assert result["job_offer_generated_info"]["questions"] == ["Q2"]
+    assert state.job_offer_generated_info["questions"] == ["Q1", "Q2"]
     assert result["conversation_history"] == [
         {"role": "assistant", "content": "Buena respuesta. Vamos con la siguiente."}
     ]

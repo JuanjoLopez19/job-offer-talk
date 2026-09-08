@@ -1,5 +1,8 @@
+from collections.abc import Generator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
+from threading import Lock
 from typing import Any
 
 from langfuse import Langfuse, propagate_attributes
@@ -12,7 +15,13 @@ from app.core.config import Config
 from app.graph.builder import base_builder
 from app.graph.checkpoint import InterruptAwareRedisSaver
 from app.graph.core.config import GraphState
-from app.shared.models import GraphInput
+from app.shared.models import MAX_SESSION_ID_LENGTH, GraphInput
+
+
+@dataclass(slots=True)
+class _SessionLockEntry:
+    lock: Lock = field(default_factory=Lock)
+    users: int = 0
 
 
 @dataclass(slots=True)
@@ -22,6 +31,10 @@ class GraphManager:
     config: Config = field(default_factory=Config)
     langfuse: Langfuse = field(init=False)
     graph_output_path: Path = Path("graph.png")
+    _session_locks: dict[str, _SessionLockEntry] = field(
+        default_factory=dict, init=False, repr=False
+    )
+    _session_locks_guard: Lock = field(default_factory=Lock, init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.langfuse = Langfuse(
@@ -63,9 +76,30 @@ class GraphManager:
         return CallbackHandler(public_key=self.config.langfuse_public_key)
 
     def invoke(self, graph_input: GraphInput | str | dict[str, Any], *, thread_id: str):
-        if not thread_id.strip():
-            raise ValueError("thread_id cannot be empty")
+        if not thread_id.strip() or len(thread_id) > MAX_SESSION_ID_LENGTH:
+            raise ValueError("thread_id must contain between 1 and 128 characters")
 
+        with self.__serialize_session(thread_id):
+            return self.__invoke(graph_input, thread_id=thread_id)
+
+    @contextmanager
+    def __serialize_session(self, thread_id: str) -> Generator[None]:
+        with self._session_locks_guard:
+            entry = self._session_locks.setdefault(thread_id, _SessionLockEntry())
+            entry.users += 1
+
+        try:
+            with entry.lock:
+                yield
+        finally:
+            with self._session_locks_guard:
+                entry.users -= 1
+                if entry.users == 0 and self._session_locks.get(thread_id) is entry:
+                    self._session_locks.pop(thread_id)
+
+    def __invoke(
+        self, graph_input: GraphInput | str | dict[str, Any], *, thread_id: str
+    ) -> GraphState:
         graph = self.__get_graph(export=False)
         config = {
             "configurable": {"thread_id": thread_id},

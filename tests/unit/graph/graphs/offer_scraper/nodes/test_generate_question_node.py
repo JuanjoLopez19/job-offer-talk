@@ -95,3 +95,25 @@ def test_generate_question_returns_an_error_when_the_llm_fails(
     assert (
         result["conditional_edge"] == OfferScraperConstants.GENERATE_QUESTION_ERROR_EDGE
     )
+
+
+def test_generate_question_returns_an_error_when_the_llm_returns_no_questions(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    response = {
+        "keywords": ["Python"],
+        "questions": [],
+        "reasoning": "No questions generated",
+        "summary": "Backend role",
+    }
+    monkeypatch.setattr(
+        node_module.LLMFactory, "get_llm", lambda **_: FakeLLM(response)
+    )
+
+    result = generate_question_node(
+        GraphState(session_id="thread-1", job_offer_context=_job_offer_context())
+    )
+
+    assert (
+        result["conditional_edge"] == OfferScraperConstants.GENERATE_QUESTION_ERROR_EDGE
+    )

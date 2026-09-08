@@ -7,4 +7,5 @@ def start_node(state: GraphState):
     return {
         GraphStateFields.ASSISTANT_MESSAGE: WELCOME_MESSAGE,
         GraphStateFields.NODE_NAME: NodeNames.INITIAL_NODE,
+        GraphStateFields.IS_TTS_MESSAGE: True,
     }

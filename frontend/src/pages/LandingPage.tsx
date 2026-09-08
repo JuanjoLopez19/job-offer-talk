@@ -30,7 +30,7 @@ export function LandingPage() {
             feedback accionable y soporte de voz.
           </p>
           <div className="hero__actions">
-            <Link className="button button--primary" to="/entrevista">
+            <Link className="button button--primary" to="/interview">
               Abrir entrevista <ArrowRight aria-hidden="true" />
             </Link>
             <a className="button button--secondary" href="#flujo">
@@ -102,7 +102,7 @@ export function LandingPage() {
             <span>[+] voz opcional</span>
             <h2>Escribe cuando quieras. Habla cuando te resulte natural.</h2>
           </div>
-          <Link className="button button--primary" to="/entrevista">
+          <Link className="button button--primary" to="/interview">
             Empezar práctica
           </Link>
         </section>

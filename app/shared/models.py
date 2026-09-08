@@ -3,9 +3,15 @@ from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field
 
+MAX_SESSION_ID_LENGTH = 128
+
 
 class GraphInput(BaseModel):
-    session_id: str = Field(default_factory=lambda: str(uuid4()))
+    session_id: str = Field(
+        default_factory=lambda: str(uuid4()),
+        min_length=1,
+        max_length=MAX_SESSION_ID_LENGTH,
+    )
     user_input: str | None = None
 
 

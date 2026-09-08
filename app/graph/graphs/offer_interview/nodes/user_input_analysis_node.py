@@ -66,7 +66,6 @@ def user_input_analysis_node(state: GraphState):
 
     updates: dict[GraphStateFields, Any] = {
         GraphStateFields.NODE_NAME: NodeNames.USER_INPUT_ANALYSIS_NODE,
-        GraphStateFields.IS_TTS_MESSAGE: False,
     }
 
     model = LLMFactory.get_llm(
@@ -118,10 +117,12 @@ def user_input_analysis_node(state: GraphState):
         )
         updates[GraphStateFields.COUNTER_QUESTIONS] = 0
         if output.next_node == OfferInterviewConstants.NEXT_QUESTION_EDGE:
-            offer_generated_info = state.job_offer_generated_info
-            offer_generated_info["questions"] = remove_question_from_list(
-                offer_generated_info["questions"], output.question
-            )
+            offer_generated_info = {
+                **state.job_offer_generated_info,
+                "questions": remove_question_from_list(
+                    state.job_offer_generated_info["questions"], output.question
+                ),
+            }
             updates[GraphStateFields.JOB_OFFER_GENERATED_INFO] = offer_generated_info
     else:
         updates[GraphStateFields.COUNTER_QUESTIONS] = state.counter_questions + 1
@@ -166,10 +167,13 @@ def user_input_analysis_node(state: GraphState):
                 node_name=NodeNames.USER_INPUT_ANALYSIS_NODE,
             )
             assistant_message = message_output.output
-            offer_generated_info = state.job_offer_generated_info
-            offer_generated_info["questions"] = remove_question_from_list(
-                offer_generated_info["questions"], message_output.question
-            )
+            offer_generated_info = {
+                **state.job_offer_generated_info,
+                "questions": remove_question_from_list(
+                    state.job_offer_generated_info["questions"],
+                    message_output.question,
+                ),
+            }
             updates[GraphStateFields.JOB_OFFER_GENERATED_INFO] = offer_generated_info
         else:
             conversation_history = add_msg_to_conversation_history(

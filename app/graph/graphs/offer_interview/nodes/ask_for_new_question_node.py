@@ -52,7 +52,6 @@ def ask_for_new_question_node(state: GraphState):
 
     updates: dict[GraphStateFields, Any] = {
         GraphStateFields.NODE_NAME: NodeNames.ASK_FOR_NEW_QUESTION_NODE,
-        GraphStateFields.IS_TTS_MESSAGE: False,
     }
 
     try:

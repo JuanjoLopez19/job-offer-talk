@@ -91,7 +91,6 @@ def test_ask_for_new_question_continues_with_the_generated_message(
     assert result["assistant_message"] == response["output"]
     assert result["conditional_edge"] == OfferInterviewConstants.CONTINUE_EDGE
     assert result["counter_questions"] == 0
-    assert result["is_tts_message"] is False
     assert result["conversation_history"] == [
         {
             "role": "assistant",

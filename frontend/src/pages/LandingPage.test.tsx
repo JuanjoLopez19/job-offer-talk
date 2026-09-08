@@ -18,7 +18,7 @@ describe("LandingPage", () => {
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain("Practica");
     expect(
       screen.getByRole("link", { name: /abrir entrevista/i }).getAttribute("href"),
-    ).toBe("/entrevista");
+    ).toBe("/interview");
   });
 });
 

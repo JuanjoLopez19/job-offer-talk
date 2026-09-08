@@ -46,7 +46,7 @@ class KokoroTTS(BaseTTS):
 
         return np.concatenate(chunks)
 
-    def generate_wav(
+    def generate_bytes(
         self, text: str, *, voice: str | None = None, speed: float = 1.0
     ) -> bytes:
         audio = self.generate(text, voice=voice, speed=speed)

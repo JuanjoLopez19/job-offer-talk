@@ -88,7 +88,7 @@ def test_graph_route_sends_generated_audio_to_connected_session(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     class FakeTTS:
-        def generate_wav(self, text: str) -> bytes:
+        def generate_bytes(self, text: str) -> bytes:
             assert text == "What interests you about this role?"
             return b"wav-audio"
 

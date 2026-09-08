@@ -25,8 +25,9 @@ los subgrafos de bienvenida, extracción de la oferta y entrevista. Los nodos
 `hitl` detienen la ejecución para solicitar información al usuario y la
 reanundan usando el mismo identificador de sesión.
 
-El archivo `graph.png` contiene siempre la representación actual del flujo y se
-actualiza automáticamente cuando se compila e invoca el grafo.
+El archivo `graph.png` contiene una representación del flujo. Su actualización se
+realiza explícitamente mediante `GraphManager.export_graph()` para que una petición de
+producción no escriba en el sistema de archivos ni dependa de un renderizador.
 
 ![Grafo de estados de JobTalk](graph.png)
 
@@ -96,7 +97,7 @@ uv run fastapi dev app/app.py
 ```
 
 FastAPI sirve la landing en `http://127.0.0.1:8000/`, la entrevista en
-`http://127.0.0.1:8000/entrevista` y la documentación de la API en
+`http://127.0.0.1:8000/interview` y la documentación de la API en
 `http://127.0.0.1:8000/docs`. En producción solo se ejecuta FastAPI; Node se usa
 exclusivamente durante la compilación.
 

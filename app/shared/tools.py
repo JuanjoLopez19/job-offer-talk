@@ -3,6 +3,8 @@ from typing import Any, Literal
 
 from job_offer_scraper_mcp.shared.constants import JobOfferInfo
 
+from app.graph.core.config import GraphState
+
 
 def job_offer_to_markdown(job_offer: dict[str, Any]) -> str:
     item = JobOfferInfo.model_validate(job_offer)
@@ -43,6 +45,15 @@ def conversation_history_to_markdown(conversation_history: list[dict[str, Any]])
 
 
 def remove_question_from_list(questions_list: list[str], question: str) -> list[str]:
-    if question in questions_list:
-        questions_list.remove(question)
-    return questions_list
+    updated_questions = questions_list.copy()
+    if question in updated_questions:
+        updated_questions.remove(question)
+    return updated_questions
+
+
+def is_tts_response(response: GraphState) -> bool:
+    return bool(
+        response.is_tts_message
+        and response.assistant_message
+        and response.assistant_message.strip()
+    )

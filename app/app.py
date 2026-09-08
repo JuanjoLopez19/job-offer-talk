@@ -6,6 +6,7 @@ from app.api.v1.__init_ import main_router
 from app.core.logger import suppress_model_loading_noise
 from app.frontend import mount_frontend
 from app.services.stt.runtime import LazySTT
+from app.services.tts.runtime import LazyTTS
 
 
 @asynccontextmanager
@@ -20,6 +21,11 @@ async def lifespan(app: FastAPI):
         provider=config.stt.provider,
         model_name=config.stt.model_name,
         device=config.stt.device,
+    )
+    app.state.tts = LazyTTS(
+        provider=config.tts.provider,
+        voice_name=config.tts.voice,
+        device=config.tts.device,
     )
 
     yield

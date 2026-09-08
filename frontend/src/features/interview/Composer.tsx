@@ -1,23 +1,45 @@
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { Mic, Send, Square } from "lucide-react";
-import { type FormEvent, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import { Button } from "../../components/ui/Button";
-import { transcribeAudio } from "./api";
 import { isValidOfferUrl } from "./validation";
 
 type ComposerProps = {
   disabled: boolean;
+  voiceDisabled?: boolean;
   mode: "offer-url" | "answer";
-  sessionId: string;
   onSend: (content: string) => Promise<boolean>;
+  onVoice: (audio: Blob) => Promise<boolean>;
 };
 
-export function Composer({ disabled, mode, sessionId, onSend }: ComposerProps) {
+export function Composer({
+  disabled,
+  voiceDisabled = false,
+  mode,
+  onSend,
+  onVoice,
+}: ComposerProps) {
   const [value, setValue] = useState("");
   const [isRecording, setRecording] = useState(false);
+  const [isTranscribing, setTranscribing] = useState(false);
   const [voiceError, setVoiceError] = useState<string | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
+  const mediaStream = useRef<MediaStream | null>(null);
   const chunks = useRef<Blob[]>([]);
+  const mounted = useRef(true);
+  const discardRecording = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      discardRecording.current = true;
+      if (recorder.current?.state === "recording") recorder.current.stop();
+      for (const track of mediaStream.current?.getTracks() ?? []) track.stop();
+      recorder.current = null;
+      mediaStream.current = null;
+    };
+  }, []);
 
   const isOfferUrlMode = mode === "offer-url";
   const hasValidValue = isOfferUrlMode ? isValidOfferUrl(value) : Boolean(value.trim());
@@ -42,31 +64,44 @@ export function Composer({ disabled, mode, sessionId, onSend }: ComposerProps) {
     }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (!mounted.current) {
+        for (const track of stream.getTracks()) track.stop();
+        return;
+      }
       const mediaRecorder = new MediaRecorder(stream);
       recorder.current = mediaRecorder;
+      mediaStream.current = stream;
+      discardRecording.current = false;
       chunks.current = [];
       mediaRecorder.addEventListener("dataavailable", (event) =>
         chunks.current.push(event.data),
       );
       mediaRecorder.addEventListener("stop", async () => {
-        setRecording(false);
         for (const track of stream.getTracks()) track.stop();
+        if (recorder.current === mediaRecorder) recorder.current = null;
+        if (mediaStream.current === stream) mediaStream.current = null;
+        if (discardRecording.current || !mounted.current) return;
+
+        setRecording(false);
+        setTranscribing(true);
         try {
-          const transcript = await transcribeAudio(
-            sessionId,
-            new Blob(chunks.current, { type: mediaRecorder.mimeType }),
-          );
-          setValue(transcript);
+          await onVoice(new Blob(chunks.current, { type: mediaRecorder.mimeType }));
         } catch (caught) {
-          setVoiceError(
-            caught instanceof Error ? caught.message : "No se pudo usar el micrófono",
-          );
+          if (mounted.current) {
+            setVoiceError(
+              caught instanceof Error ? caught.message : "No se pudo usar el micrófono",
+            );
+          }
+        } finally {
+          if (mounted.current) setTranscribing(false);
         }
       });
       mediaRecorder.start();
       setRecording(true);
     } catch {
-      setVoiceError("Permite el acceso al micrófono para dictar tu respuesta");
+      if (mounted.current) {
+        setVoiceError("Permite el acceso al micrófono para dictar tu respuesta");
+      }
     }
   }
 
@@ -120,7 +155,9 @@ export function Composer({ disabled, mode, sessionId, onSend }: ComposerProps) {
                 type="button"
                 onClick={toggleRecording}
                 aria-label={micLabel}
-                disabled={disabled}
+                disabled={
+                  isRecording ? false : disabled || voiceDisabled || isTranscribing
+                }
               >
                 {isRecording ? <Square aria-hidden="true" /> : <Mic aria-hidden="true" />}
               </Button>

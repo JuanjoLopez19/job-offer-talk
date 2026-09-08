@@ -1,5 +1,8 @@
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
+from threading import Lock
+from time import sleep
 from types import SimpleNamespace
 from typing import Any, cast
 
@@ -114,6 +117,13 @@ def test_invoke_requires_an_object_to_start_a_new_interaction() -> None:
         manager.invoke("continue", thread_id="thread-1")
 
 
+def test_invoke_rejects_an_oversized_thread_id() -> None:
+    manager = GraphManager(graph=cast(CompiledStateGraph, FakeGraph()))
+
+    with pytest.raises(ValueError, match="between 1 and 128"):
+        manager.invoke({}, thread_id="x" * 129)
+
+
 def test_langfuse_client_uses_the_application_configuration(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -155,7 +165,7 @@ def test_export_graph_writes_a_png_file(tmp_path: Path) -> None:
     assert output_path.read_bytes() == b"\x89PNG\r\n\x1a\nunit-test"
 
 
-def test_first_invocation_exports_the_compiled_graph(
+def test_first_invocation_does_not_export_the_compiled_graph(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     graph = FakeGraph()
@@ -171,7 +181,42 @@ def test_first_invocation_exports_the_compiled_graph(
 
     manager.invoke({}, thread_id="thread-1")
 
-    assert exported == [None]
+    assert exported == []
+
+
+def test_invocations_for_the_same_session_are_serialized() -> None:
+    class ConcurrentFakeGraph(FakeGraph):
+        def __init__(self) -> None:
+            super().__init__()
+            self.active = 0
+            self.max_active = 0
+            self.guard = Lock()
+
+        def invoke(
+            self,
+            graph_input: Any,
+            *,
+            config: dict[str, Any],
+        ) -> dict[str, Any]:
+            with self.guard:
+                self.active += 1
+                self.max_active = max(self.max_active, self.active)
+            sleep(0.05)
+            with self.guard:
+                self.active -= 1
+            return super().invoke(graph_input, config=config)
+
+    graph = ConcurrentFakeGraph()
+    manager = GraphManager(graph=cast(CompiledStateGraph, graph))
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futures = [
+            executor.submit(manager.invoke, {}, thread_id="thread-1") for _ in range(2)
+        ]
+        for future in futures:
+            future.result()
+
+    assert graph.max_active == 1
 
 
 def test_initial_graph_invocation_interrupts_for_a_job_offer_url() -> None:

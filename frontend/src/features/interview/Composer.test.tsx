@@ -19,7 +19,7 @@ describe("Composer", () => {
 
     render(
       <Tooltip.Provider>
-        <Composer disabled={false} mode="answer" sessionId="session-1" onSend={onSend} />
+        <Composer disabled={false} mode="answer" onSend={onSend} onVoice={vi.fn()} />
       </Tooltip.Provider>,
     );
 
@@ -38,12 +38,7 @@ describe("Composer", () => {
 
     render(
       <Tooltip.Provider>
-        <Composer
-          disabled={false}
-          mode="offer-url"
-          sessionId="session-1"
-          onSend={onSend}
-        />
+        <Composer disabled={false} mode="offer-url" onSend={onSend} onVoice={vi.fn()} />
       </Tooltip.Provider>,
     );
 
@@ -61,10 +56,68 @@ describe("Composer", () => {
     expect(screen.getByText(/introduce una url válida/i)).toBeTruthy();
 
     await user.clear(input);
+    await user.type(input, "ftp://empresa.example/ofertas/backend");
+    expect((submit as HTMLButtonElement).disabled).toBe(true);
+
+    await user.clear(input);
     await user.type(input, "https://empresa.example/ofertas/backend");
     expect((submit as HTMLButtonElement).disabled).toBe(false);
 
     await user.click(submit);
     expect(onSend).toHaveBeenCalledWith("https://empresa.example/ofertas/backend");
+  });
+
+  it("detiene la grabación y descarta el audio al desmontarse", async () => {
+    const user = userEvent.setup();
+    const track = { stop: vi.fn() };
+    const stream = { getTracks: () => [track] } as unknown as MediaStream;
+    const originalMediaDevices = navigator.mediaDevices;
+    const originalMediaRecorder = globalThis.MediaRecorder;
+
+    class FakeMediaRecorder {
+      state: RecordingState = "inactive";
+      mimeType = "audio/webm";
+      listeners = new Map<string, () => void>();
+
+      addEventListener(name: string, listener: () => void) {
+        this.listeners.set(name, listener);
+      }
+
+      start() {
+        this.state = "recording";
+      }
+
+      stop() {
+        this.state = "inactive";
+        this.listeners.get("stop")?.();
+      }
+    }
+
+    Object.defineProperty(navigator, "mediaDevices", {
+      configurable: true,
+      value: { getUserMedia: vi.fn(async () => stream) },
+    });
+    globalThis.MediaRecorder = FakeMediaRecorder as unknown as typeof MediaRecorder;
+    const onVoice = vi.fn(async () => true);
+
+    try {
+      const { unmount } = render(
+        <Tooltip.Provider>
+          <Composer disabled={false} mode="answer" onSend={vi.fn()} onVoice={onVoice} />
+        </Tooltip.Provider>,
+      );
+      await user.click(screen.getByRole("button", { name: /dictar respuesta/i }));
+
+      unmount();
+
+      expect(track.stop).toHaveBeenCalled();
+      expect(onVoice).not.toHaveBeenCalled();
+    } finally {
+      Object.defineProperty(navigator, "mediaDevices", {
+        configurable: true,
+        value: originalMediaDevices,
+      });
+      globalThis.MediaRecorder = originalMediaRecorder;
+    }
   });
 });

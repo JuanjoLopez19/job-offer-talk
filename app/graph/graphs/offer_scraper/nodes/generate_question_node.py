@@ -21,7 +21,8 @@ class LLMOutput(BaseModel):
         description="Las keywords más importantes de la oferta de trabajo"
     )
     questions: list[str] = Field(
-        description="Las preguntas más relevantes y útiles para la entrevista"
+        description="Las preguntas más relevantes y útiles para la entrevista",
+        min_length=1,
     )
 
     reasoning: str = Field(
@@ -56,6 +57,8 @@ def generate_question_node(state: GraphState):
                 job_offer=job_offer_to_markdown(state.job_offer_context),
             )
         )
+        output = LLMOutput.model_validate(ai_message)
+        first_question = output.questions[0]
     except Exception as e:
         get_logger(__name__).error(f"Error generating question: {e}")
         return {
@@ -63,10 +66,6 @@ def generate_question_node(state: GraphState):
             GraphStateFields.NODE_NAME: NodeNames.GENERATE_QUESTION_NODE,
             GraphStateFields.CONDITIONAL_EDGE: OfferScraperConstants.GENERATE_QUESTION_ERROR_EDGE,
         }
-
-    output = LLMOutput.model_validate(ai_message)
-
-    first_question = output.questions[0]
 
     conversation_history = add_msg_to_conversation_history(
         "assistant", first_question, node_name=NodeNames.GENERATE_QUESTION_NODE
@@ -79,5 +78,4 @@ def generate_question_node(state: GraphState):
         GraphStateFields.JOB_OFFER_GENERATED_INFO: output.model_dump(),
         GraphStateFields.NODE_NAME: NodeNames.GENERATE_QUESTION_NODE,
         GraphStateFields.CONDITIONAL_EDGE: OfferScraperConstants.GENERATE_QUESTION_SUCCESS_EDGE,
-        GraphStateFields.IS_TTS_MESSAGE: False,
     }

@@ -5,10 +5,12 @@ from fastapi import APIRouter, Body, Header, Request, Response
 from starlette.concurrency import run_in_threadpool
 
 from app.api.v1.connection_manager import connection_manager
+from app.core.logger import get_logger
 from app.graph.core.config import GraphState
 from app.graph.manager import GraphManager
 from app.services.tts.common.base import BaseTTS
-from app.shared.models import GraphInput, GraphOutput
+from app.shared.models import MAX_SESSION_ID_LENGTH, GraphInput, GraphOutput
+from app.shared.tools import is_tts_response
 
 graph_router = APIRouter(tags=["Graph"])
 
@@ -21,7 +23,14 @@ async def get_graph(
     graph_input: Annotated[GraphInput | str, Body()],
     request: Request,
     response: Response,
-    thread_id: Annotated[str | None, Header(alias=THREAD_ID_HEADER)] = None,
+    thread_id: Annotated[
+        str | None,
+        Header(
+            alias=THREAD_ID_HEADER,
+            min_length=1,
+            max_length=MAX_SESSION_ID_LENGTH,
+        ),
+    ] = None,
 ) -> GraphOutput:
     if isinstance(graph_input, GraphInput):
         resolved_thread_id = thread_id or graph_input.session_id
@@ -37,15 +46,18 @@ async def get_graph(
 
     if (
         isinstance(result, GraphState)
-        and result.is_tts_message
-        and result.assistant_message
+        and is_tts_response(result)
         and connection_manager.is_connected(result.session_id)
     ):
-        tts: BaseTTS = request.app.state.tts
-        audio = await run_in_threadpool(tts.generate_wav, result.assistant_message)
-        await connection_manager.send_tts_message(
-            result.session_id, result.assistant_message, audio
-        )
+        assistant_message = result.assistant_message
+        if assistant_message is None:
+            get_logger().warn("The assistant message is empty, skipping TTS response")
+        else:
+            tts: BaseTTS = request.app.state.tts
+            audio = await run_in_threadpool(tts.generate_bytes, assistant_message)
+            await connection_manager.send_tts_message(
+                result.session_id, assistant_message, audio
+            )
 
     result_data = result.model_dump() if isinstance(result, GraphState) else result
     return GraphOutput.model_validate(result_data)

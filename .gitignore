@@ -225,5 +225,6 @@ samples/
 # Frontend build and package manager artifacts
 frontend/dist/
 node_modules/
+*.tsbuildinfo
 
 .pnpm-store

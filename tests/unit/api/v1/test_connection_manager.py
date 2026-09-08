@@ -34,3 +34,24 @@ def test_connection_manager_ignores_unknown_session() -> None:
     sent = asyncio.run(manager.send_tts_message("missing-session", "Hello", b"audio"))
 
     assert sent is False
+
+
+def test_connection_manager_correlates_voice_tts_with_its_turn() -> None:
+    manager = ConnectionManager()
+    websocket = AsyncMock(spec=WebSocket)
+
+    async def send_message() -> bool:
+        await manager.connect("session-1", websocket)
+        return await manager.send_tts_message(
+            "session-1", "Hello", b"wav-audio", turn_id="turn-1"
+        )
+
+    assert asyncio.run(send_message()) is True
+    websocket.send_json.assert_awaited_once_with(
+        {
+            "type": "tts_message",
+            "text": "Hello",
+            "content_type": "audio/wav",
+            "turn_id": "turn-1",
+        }
+    )

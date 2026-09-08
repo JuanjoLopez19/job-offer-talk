@@ -7,7 +7,6 @@ def conversation_history_reducer(
     current: list[dict[str, str]],
     update: list[dict[str, str]] | None,
 ) -> list[dict[str, str]]:
-    # None significa resetear el historial
     if update is None:
         return []
 
@@ -29,5 +28,5 @@ class GraphState(BaseModel):
     conversation_history: Annotated[
         list[dict[str, str]], conversation_history_reducer
     ] = Field(default_factory=list)
-    is_tts_message: bool = False
+    is_tts_message: bool = True
     counter_questions: int = 0
