@@ -6,7 +6,13 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <Link className="wordmark" to="/" aria-label="JobTalk, inicio">
-        [ JobTalk ]
+        <img
+          className="brand-icon"
+          src={`${import.meta.env.BASE_URL}jobtalk-icon.png`}
+          alt=""
+          aria-hidden="true"
+        />
+        <span>[ JobTalk ]</span>
       </Link>
       <nav className="site-nav" aria-label="Navegación principal">
         <a href="#producto">Producto</a>

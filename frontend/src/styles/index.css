@@ -121,8 +121,18 @@ a {
   border-color: var(--danger);
 }
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-weight: 700;
   white-space: nowrap;
+}
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  display: block;
+  flex: none;
+  border-radius: 6px;
 }
 .sr-only {
   position: absolute;
@@ -756,6 +766,10 @@ footer {
 }
 
 @media (max-width: 820px) {
+  .brand-icon {
+    width: 30px;
+    height: 30px;
+  }
   .site-nav {
     display: none;
   }

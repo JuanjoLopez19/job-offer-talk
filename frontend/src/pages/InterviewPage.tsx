@@ -18,7 +18,13 @@ export function InterviewPage() {
     <div className="interview-page">
       <header className="interview-header">
         <Link className="wordmark" to="/">
-          [ JobTalk / entrevista ]
+          <img
+            className="brand-icon"
+            src={`${import.meta.env.BASE_URL}jobtalk-icon.png`}
+            alt=""
+            aria-hidden="true"
+          />
+          <span>[ JobTalk / entrevista ]</span>
         </Link>
         <div className="interview-header__actions">
           <button
