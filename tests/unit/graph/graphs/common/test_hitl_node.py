@@ -9,7 +9,11 @@ def test_human_node_returns_the_resumed_value(monkeypatch: pytest.MonkeyPatch) -
 
     result = hitl_node.human_node(GraphState(session_id="thread-1"), "url_input")
 
-    assert result == {"user_input": "https://example.com/job", "node_name": "url_input"}
+    assert result == {
+        "user_input": "https://example.com/job",
+        "node_name": "url_input",
+        "is_tts_active": False,
+    }
 
 
 def test_human_node_adds_user_messages_to_the_history(
@@ -31,3 +35,18 @@ def test_human_node_adds_user_messages_to_the_history(
     assert result["conversation_history"] == [
         {"role": "user", "content": "Mi respuesta", "node_name": "analysis"}
     ]
+
+
+def test_human_node_updates_the_tts_preference(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        hitl_node,
+        "interrupt",
+        lambda _: {"user_input": "Mi respuesta", "is_tts_active": True},
+    )
+
+    result = hitl_node.human_node(GraphState(session_id="thread-1"), "analysis")
+
+    assert result["user_input"] == "Mi respuesta"
+    assert result["is_tts_active"] is True

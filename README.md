@@ -16,7 +16,7 @@ sesión.
 - Soporte para Google Gemini, OpenAI, Anthropic y modelos locales con Ollama.
 - API construida con FastAPI.
 - Interfaz React responsive con temas claro y oscuro.
-- Un único servicio en producción: FastAPI sirve la API y el frontend compilado.
+- Backend y frontend desacoplados para poder desplegarlos de forma independiente.
 
 ## Arquitectura del flujo
 
@@ -38,7 +38,7 @@ producción no escriba en el sistema de archivos ni dependa de un renderizador.
 - Redis disponible en `localhost:6379`.
 - Credenciales de Langfuse.
 - Un proveedor de LLM configurado.
-- Node.js y pnpm para compilar el frontend.
+- Node.js y pnpm para desarrollar y compilar el frontend.
 
 El procesamiento de voz usa Faster Whisper para STT y Kokoro para TTS. Ambos
 pueden utilizar CPU o CUDA según la configuración.
@@ -89,28 +89,26 @@ Para cambiar de proveedor, instala su extra y establece `LLM_PROVIDER` como
 
 ## Ejecución
 
-Compila React, arranca Redis y después inicia FastAPI:
+Arranca Redis y después inicia FastAPI:
 
 ```powershell
-pnpm build
 uv run fastapi dev app/app.py
 ```
 
-FastAPI sirve la landing en `http://127.0.0.1:8000/`, la entrevista en
-`http://127.0.0.1:8000/interview` y la documentación de la API en
-`http://127.0.0.1:8000/docs`. En producción solo se ejecuta FastAPI; Node se usa
-exclusivamente durante la compilación.
+La documentación de la API queda disponible en `http://127.0.0.1:8000/docs`.
+FastAPI no sirve archivos ni rutas del frontend.
 
-Para trabajar en el frontend con recarga automática, ejecuta FastAPI y Vite en
-terminales distintas. Vite redirige las llamadas HTTP y WebSocket a FastAPI:
+Para trabajar con la interfaz, ejecuta FastAPI y Vite en terminales distintas.
+Vite sirve el frontend en `http://127.0.0.1:5173` y redirige las llamadas HTTP y
+WebSocket a FastAPI:
 
 ```powershell
 uv run fastapi dev app/app.py
 pnpm dev:frontend
 ```
 
-El servidor de Vite es solo para desarrollo; la entrega final continúa siendo un
-único servicio FastAPI.
+En producción, despliega el build generado por `pnpm build` en un servidor de
+archivos estáticos y configura allí el proxy de `/v1` hacia FastAPI.
 
 ### Iniciar una conversación
 
@@ -169,7 +167,7 @@ frontend/
 ├── src/components/  # Componentes de interfaz reutilizables
 ├── src/features/    # Tema, conversación, voz y cliente API
 ├── src/pages/       # Landing y entrevista
-└── dist/            # Build generado y servido por FastAPI
+└── dist/            # Build estático generado por Vite
 tests/unit/           # Pruebas unitarias con la misma estructura que app/
 graph.png             # Diagrama actualizado del grafo
 ```

@@ -59,6 +59,7 @@ function toAudioBlob(data: unknown, contentType: string): Blob | null {
 export function useInterviewWebSocket(
   sessionId: string,
   handlers: InterviewSocketHandlers = {},
+  isTtsActive = true,
 ) {
   const socketRef = useRef<WebSocket | null>(null);
   const pendingTurn = useRef<PendingTurn | null>(null);
@@ -67,6 +68,7 @@ export function useInterviewWebSocket(
   const audioPlayer = useRef<HTMLAudioElement | null>(null);
   const audioUrl = useRef<string | null>(null);
   const handlersRef = useRef(handlers);
+  const isTtsActiveRef = useRef(isTtsActive);
   const [status, setStatus] = useState<SocketStatus>("idle");
   handlersRef.current = handlers;
 
@@ -104,6 +106,11 @@ export function useInterviewWebSocket(
     },
     [stopPlayback],
   );
+
+  useEffect(() => {
+    isTtsActiveRef.current = isTtsActive;
+    if (!isTtsActive) stopPlayback();
+  }, [isTtsActive, stopPlayback]);
 
   useEffect(() => {
     setStatus("idle");
@@ -144,7 +151,7 @@ export function useInterviewWebSocket(
           }
           return;
         }
-        playTtsAudio(audio);
+        if (isTtsActiveRef.current) playTtsAudio(audio);
         if (header.turnId && pendingTurn.current?.id === header.turnId) {
           resolvePending(pendingTurn);
         }
@@ -215,53 +222,57 @@ export function useInterviewWebSocket(
     };
   }, [playTtsAudio, sessionId, stopPlayback]);
 
-  const sendVoice = useCallback(async (audio: Blob) => {
-    const socket = socketRef.current;
-    if (!socket || socket.readyState !== WebSocket.OPEN) {
-      throw new Error("Socket no conectado");
-    }
-    if (pendingTurn.current) {
-      throw new Error("Ya hay un mensaje de voz en curso");
-    }
+  const sendVoice = useCallback(
+    async (audio: Blob) => {
+      const socket = socketRef.current;
+      if (!socket || socket.readyState !== WebSocket.OPEN) {
+        throw new Error("Socket no conectado");
+      }
+      if (pendingTurn.current) {
+        throw new Error("Ya hay un mensaje de voz en curso");
+      }
 
-    const audioBuffer = await audio.arrayBuffer();
-    if (socket !== socketRef.current || socket.readyState !== WebSocket.OPEN) {
-      throw new Error("Conexión cerrada");
-    }
+      const audioBuffer = await audio.arrayBuffer();
+      if (socket !== socketRef.current || socket.readyState !== WebSocket.OPEN) {
+        throw new Error("Conexión cerrada");
+      }
 
-    const turnId = crypto.randomUUID();
-    const turn = new Promise<void>((resolve, reject) => {
-      const timeoutId = setTimeout(() => {
-        if (pendingTurn.current?.id === turnId) {
-          if (pendingTts.current?.turnId === turnId) discardNextBinary.current = true;
-          pendingTts.current = null;
-          rejectPending(
-            pendingTurn,
-            new Error("La respuesta de voz ha tardado demasiado"),
-          );
-        }
-      }, VOICE_TURN_TIMEOUT_MS);
-      pendingTurn.current = { id: turnId, resolve, reject, timeoutId };
-    });
+      const turnId = crypto.randomUUID();
+      const turn = new Promise<void>((resolve, reject) => {
+        const timeoutId = setTimeout(() => {
+          if (pendingTurn.current?.id === turnId) {
+            if (pendingTts.current?.turnId === turnId) discardNextBinary.current = true;
+            pendingTts.current = null;
+            rejectPending(
+              pendingTurn,
+              new Error("La respuesta de voz ha tardado demasiado"),
+            );
+          }
+        }, VOICE_TURN_TIMEOUT_MS);
+        pendingTurn.current = { id: turnId, resolve, reject, timeoutId };
+      });
 
-    try {
-      socket.send(
-        JSON.stringify({
-          event: "user_message",
-          content_type: audio.type,
-          turn_id: turnId,
-        }),
-      );
-      socket.send(audioBuffer);
-    } catch (caught) {
-      rejectPending(
-        pendingTurn,
-        caught instanceof Error ? caught : new Error("No se pudo enviar el audio"),
-      );
-    }
+      try {
+        socket.send(
+          JSON.stringify({
+            event: "user_message",
+            content_type: audio.type,
+            is_tts_active: isTtsActive,
+            turn_id: turnId,
+          }),
+        );
+        socket.send(audioBuffer);
+      } catch (caught) {
+        rejectPending(
+          pendingTurn,
+          caught instanceof Error ? caught : new Error("No se pudo enviar el audio"),
+        );
+      }
 
-    return turn;
-  }, []);
+      return turn;
+    },
+    [isTtsActive],
+  );
 
   return { status, sendVoice };
 }

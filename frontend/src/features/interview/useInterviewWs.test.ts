@@ -114,6 +114,7 @@ describe("useInterviewWebSocket", () => {
     expect(metadata).toMatchObject({
       event: "user_message",
       content_type: "audio/webm",
+      is_tts_active: true,
     });
     expect(socket?.sent[1]).toBeInstanceOf(ArrayBuffer);
 
@@ -197,6 +198,48 @@ describe("useInterviewWebSocket", () => {
 
     expect(player?.pause).toHaveBeenCalledOnce();
     expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:tts-audio");
+  });
+
+  it("detiene el audio activo y envía la preferencia al desactivar TTS", async () => {
+    const { result, rerender } = renderHook(
+      ({ isTtsActive }) => useInterviewWebSocket("session-1", {}, isTtsActive),
+      { initialProps: { isTtsActive: true } },
+    );
+    const socket = MockWebSocket.instances.at(-1);
+    act(() => socket?.open());
+    act(() =>
+      socket?.emit(
+        JSON.stringify({
+          type: "tts_message",
+          text: "Respuesta",
+          content_type: "audio/wav",
+        }),
+      ),
+    );
+    act(() => socket?.emit(new ArrayBuffer(8)));
+
+    const player = MockAudio.instances.at(-1);
+    rerender({ isTtsActive: false });
+    expect(player?.pause).toHaveBeenCalledOnce();
+
+    const turn = result.current.sendVoice(new Blob(["audio"], { type: "audio/webm" }));
+    await act(async () => Promise.resolve());
+    const metadata = JSON.parse(String(socket?.sent[0])) as {
+      is_tts_active: boolean;
+      turn_id: string;
+    };
+    expect(metadata.is_tts_active).toBe(false);
+
+    act(() =>
+      socket?.emit(
+        JSON.stringify({
+          event: "assistant_message",
+          message: "Respuesta sin audio",
+          turn_id: metadata.turn_id,
+        }),
+      ),
+    );
+    await expect(turn).resolves.toBeUndefined();
   });
 
   it("cancela el turno cuando el servidor tarda demasiado", async () => {

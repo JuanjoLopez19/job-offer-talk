@@ -70,13 +70,13 @@ def test_tts_decision_depends_only_on_graph_output() -> None:
         GraphState(
             session_id="session-1",
             assistant_message="Pregunta",
-            is_tts_message=True,
+            is_tts_active=True,
         )
     )
     assert not is_tts_response(
         GraphState(
             session_id="session-1",
             assistant_message=None,
-            is_tts_message=True,
+            is_tts_active=True,
         )
     )

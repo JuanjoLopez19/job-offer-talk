@@ -16,8 +16,11 @@ export function useInterview() {
     useState<JobOfferGeneratedInfo | null>(null);
   const [isLoading, setLoading] = useState(true);
   const [isAwaitingOfferUrl, setAwaitingOfferUrl] = useState(true);
+  const [isTtsActive, setTtsActive] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const generation = useRef(0);
+  const ttsPreference = useRef(isTtsActive);
+  ttsPreference.current = isTtsActive;
 
   const onUserTranscript = useCallback((text: string) => {
     setMessages((current) => [...current, message("user", text)]);
@@ -27,10 +30,14 @@ export function useInterview() {
     setMessages((current) => [...current, message("assistant", text)]);
   }, []);
 
-  const { status: socketStatus, sendVoice } = useInterviewWebSocket(sessionId, {
-    onUserTranscript,
-    onAssistantMessage,
-  });
+  const { status: socketStatus, sendVoice } = useInterviewWebSocket(
+    sessionId,
+    {
+      onUserTranscript,
+      onAssistantMessage,
+    },
+    isTtsActive,
+  );
 
   useEffect(() => {
     const currentGeneration = ++generation.current;
@@ -38,7 +45,7 @@ export function useInterview() {
     setError(null);
     setMessages([]);
     setAwaitingOfferUrl(true);
-    startInterview(sessionId)
+    startInterview(sessionId, ttsPreference.current)
       .then((response) => {
         if (generation.current === currentGeneration) {
           setMessages([message("assistant", response.assistant_message)]);
@@ -69,7 +76,7 @@ export function useInterview() {
       setLoading(true);
       setError(null);
       try {
-        const response = await replyToInterview(sessionId, cleanContent);
+        const response = await replyToInterview(sessionId, cleanContent, isTtsActive);
         if (generation.current !== currentGeneration) return false;
         setMessages((current) => [
           ...current,
@@ -89,7 +96,7 @@ export function useInterview() {
         if (generation.current === currentGeneration) setLoading(false);
       }
     },
-    [isAwaitingOfferUrl, isLoading, sessionId],
+    [isAwaitingOfferUrl, isLoading, isTtsActive, sessionId],
   );
 
   const sendVoiceReply = useCallback(
@@ -130,7 +137,9 @@ export function useInterview() {
     jobOfferGeneratedInfo,
     isLoading,
     isAwaitingOfferUrl,
+    isTtsActive,
     error,
+    toggleTts: () => setTtsActive((active) => !active),
     send,
     sendVoice: sendVoiceReply,
     socketStatus,

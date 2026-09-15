@@ -66,7 +66,11 @@ async def get_conversation(
                 )
                 graph_response = await run_in_threadpool(
                     graph_manager.invoke,
-                    GraphInput(session_id=session_id, user_input=user_message),
+                    GraphInput(
+                        session_id=session_id,
+                        user_input=user_message,
+                        is_tts_active=metadata.is_tts_active,
+                    ),
                     thread_id=session_id,
                 )
                 if isinstance(graph_response, GraphState) and is_tts_response(

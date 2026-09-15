@@ -1,3 +1,4 @@
+from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
 
 from app.core.logger import get_logger
@@ -18,18 +19,32 @@ from app.shared.tools import add_msg_to_conversation_history, job_offer_to_markd
 
 class LLMOutput(BaseModel):
     keywords: list[str] = Field(
-        description="Las keywords más importantes de la oferta de trabajo"
+        description=(
+            "Las palabras clave más importantes de la oferta. Conserva los nombres "
+            "propios y de tecnologías en su idioma original."
+        )
     )
     questions: list[str] = Field(
-        description="Las preguntas más relevantes y útiles para la entrevista",
+        description=(
+            "Las preguntas más relevantes y útiles para la entrevista, redactadas "
+            "íntegramente en español de España."
+        ),
         min_length=1,
     )
 
     reasoning: str = Field(
-        description="La razón por la que generaste las keywords y las preguntas"
+        description=(
+            "La razón por la que generaste las palabras clave y las preguntas, "
+            "redactada íntegramente en español de España."
+        )
     )
 
-    summary: str = Field(description="El resumen de la oferta de trabajo")
+    summary: str = Field(
+        description=(
+            "El resumen de la oferta de trabajo, redactado íntegramente en español "
+            "de España."
+        )
+    )
 
 
 def generate_question_node(state: GraphState):
@@ -42,7 +57,7 @@ def generate_question_node(state: GraphState):
 
     model = LLMFactory.get_llm(
         timeout=20,
-        temperature=1.4,
+        temperature=0.2,
         max_tokens=1000,
         max_retries=3,
         thinking_level="low",
@@ -51,11 +66,15 @@ def generate_question_node(state: GraphState):
     try:
         structured_model = model.with_structured_output(LLMOutput)
         ai_message = structured_model.invoke(
-            QUESTION_GENERATOR_PROMPT.format(
-                role=ROLE_PROMPT,
-                question_numbers=10,
-                job_offer=job_offer_to_markdown(state.job_offer_context),
-            )
+            [
+                SystemMessage(content=ROLE_PROMPT),
+                HumanMessage(
+                    content=QUESTION_GENERATOR_PROMPT.format(
+                        question_numbers=10,
+                        job_offer=job_offer_to_markdown(state.job_offer_context),
+                    )
+                ),
+            ]
         )
         output = LLMOutput.model_validate(ai_message)
         first_question = output.questions[0]

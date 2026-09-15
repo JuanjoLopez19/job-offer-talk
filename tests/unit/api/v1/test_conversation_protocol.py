@@ -13,11 +13,13 @@ def test_voice_metadata_accepts_supported_audio_with_codec() -> None:
         {
             "event": "user_message",
             "content_type": "audio/webm;codecs=opus",
+            "is_tts_active": True,
             "turn_id": "turn-1",
         }
     )
 
     assert metadata.content_type == "audio/webm;codecs=opus"
+    assert metadata.is_tts_active is True
 
 
 def test_voice_metadata_rejects_unsupported_content_type() -> None:

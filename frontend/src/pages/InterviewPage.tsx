@@ -1,3 +1,4 @@
+import { Volume2, VolumeX } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "../components/ui/ThemeToggle";
 import { Composer } from "../features/interview/Composer";
@@ -19,11 +20,30 @@ export function InterviewPage() {
         <Link className="wordmark" to="/">
           [ JobTalk / entrevista ]
         </Link>
-        <div>
-          <span>
-            {" "}
-            <ThemeToggle />
-          </span>
+        <div className="interview-header__actions">
+          <button
+            className="tts-toggle"
+            type="button"
+            role="switch"
+            aria-checked={interview.isTtsActive}
+            onClick={interview.toggleTts}
+          >
+            {interview.isTtsActive ? (
+              <Volume2 aria-hidden="true" />
+            ) : (
+              <VolumeX aria-hidden="true" />
+            )}
+            <span>TTS</span>
+            <span className="tts-toggle__track" aria-hidden="true">
+              <span className="tts-toggle__thumb" />
+            </span>
+            <span className="sr-only">
+              {interview.isTtsActive
+                ? "Desactivar voz del asistente"
+                : "Activar voz del asistente"}
+            </span>
+          </button>
+          <ThemeToggle />
         </div>
       </header>
       <div className="interview-layout">

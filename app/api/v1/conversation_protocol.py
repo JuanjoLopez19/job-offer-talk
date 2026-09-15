@@ -17,6 +17,7 @@ SUPPORTED_AUDIO_TYPES = frozenset(
 class VoiceMessageMetadata(BaseModel):
     event: Literal["user_message"]
     content_type: str
+    is_tts_active: bool = False
     turn_id: str = Field(min_length=1, max_length=64)
 
     @field_validator("content_type")

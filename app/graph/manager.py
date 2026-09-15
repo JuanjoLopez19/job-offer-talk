@@ -15,7 +15,7 @@ from app.core.config import Config
 from app.graph.builder import base_builder
 from app.graph.checkpoint import InterruptAwareRedisSaver
 from app.graph.core.config import GraphState
-from app.shared.models import MAX_SESSION_ID_LENGTH, GraphInput
+from app.shared.models import MAX_SESSION_ID_LENGTH, GraphInput, GraphResumeInput
 
 
 @dataclass(slots=True)
@@ -120,12 +120,17 @@ class GraphManager:
         ):
             snapshot = graph.get_state(config)
             if snapshot.interrupts:
-                resume_value = (
-                    graph_input.user_input
-                    if isinstance(graph_input, GraphInput)
-                    else graph_input
+                if isinstance(graph_input, GraphInput):
+                    resume_value = GraphResumeInput.model_validate(
+                        graph_input.model_dump()
+                    )
+                elif isinstance(graph_input, str):
+                    resume_value = GraphResumeInput(user_input=graph_input)
+                else:
+                    resume_value = GraphResumeInput.model_validate(graph_input)
+                state = graph.invoke(
+                    Command(resume=resume_value.model_dump()), config=config
                 )
-                state = graph.invoke(Command(resume=resume_value), config=config)
                 return GraphState.model_validate(state)
 
             if isinstance(graph_input, str):

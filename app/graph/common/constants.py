@@ -34,5 +34,5 @@ class GraphStateFields(StrEnum):
     JOB_OFFER_CONTEXT = "job_offer_context"
     JOB_OFFER_GENERATED_INFO = "job_offer_generated_info"
     CONVERSATION_HISTORY = "conversation_history"
-    IS_TTS_MESSAGE = "is_tts_message"
+    IS_TTS_ACTIVE = "is_tts_active"
     COUNTER_QUESTIONS = "counter_questions"

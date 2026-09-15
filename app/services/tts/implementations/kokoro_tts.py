@@ -8,6 +8,7 @@ import soundfile as sf
 from kokoro import KPipeline
 
 from app.services.tts.common.base import BaseTTS
+from app.shared.tools import remove_html_tags
 
 SAMPLE_RATE = 24000
 
@@ -49,7 +50,8 @@ class KokoroTTS(BaseTTS):
     def generate_bytes(
         self, text: str, *, voice: str | None = None, speed: float = 1.0
     ) -> bytes:
-        audio = self.generate(text, voice=voice, speed=speed)
+        cleaned_text = remove_html_tags(text)
+        audio = self.generate(cleaned_text, voice=voice, speed=speed)
         buffer = BytesIO()
         sf.write(buffer, audio, SAMPLE_RATE, format="WAV", subtype="PCM_16")
         return buffer.getvalue()

@@ -19,10 +19,21 @@ async function postGraph(
   return response.json() as Promise<GraphResponse>;
 }
 
-export function startInterview(sessionId: string) {
-  return postGraph({ session_id: sessionId });
+export function startInterview(sessionId: string, isTtsActive: boolean) {
+  return postGraph({ session_id: sessionId, is_tts_active: isTtsActive });
 }
 
-export function replyToInterview(sessionId: string, message: string) {
-  return postGraph(message, sessionId);
+export function replyToInterview(
+  sessionId: string,
+  message: string,
+  isTtsActive: boolean,
+) {
+  return postGraph(
+    {
+      session_id: sessionId,
+      user_input: message,
+      is_tts_active: isTtsActive,
+    },
+    sessionId,
+  );
 }

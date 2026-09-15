@@ -106,7 +106,7 @@ def test_graph_route_sends_generated_audio_to_connected_session(
     result = GraphState(
         session_id="session-1",
         assistant_message="What interests you about this role?",
-        is_tts_message=True,
+        is_tts_active=True,
     )
 
     monkeypatch.setattr(GraphManager, "invoke", lambda *args, **kwargs: result)

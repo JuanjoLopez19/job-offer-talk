@@ -107,7 +107,20 @@ def test_invoke_resumes_a_pending_human_interaction() -> None:
     manager.invoke("continue", thread_id="thread-1")
 
     assert isinstance(graph.input, Command)
-    assert graph.input.resume == "continue"
+    assert graph.input.resume == {"user_input": "continue", "is_tts_active": False}
+
+
+def test_invoke_resumes_with_the_tts_preference() -> None:
+    graph = FakeGraph(interrupted=True)
+    manager = GraphManager(graph=cast(CompiledStateGraph, graph))
+
+    manager.invoke(
+        {"user_input": "continue", "is_tts_active": True},
+        thread_id="thread-1",
+    )
+
+    assert isinstance(graph.input, Command)
+    assert graph.input.resume == {"user_input": "continue", "is_tts_active": True}
 
 
 def test_invoke_requires_an_object_to_start_a_new_interaction() -> None:

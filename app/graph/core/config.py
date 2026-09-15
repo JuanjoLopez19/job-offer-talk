@@ -28,5 +28,5 @@ class GraphState(BaseModel):
     conversation_history: Annotated[
         list[dict[str, str]], conversation_history_reducer
     ] = Field(default_factory=list)
-    is_tts_message: bool = True
+    is_tts_active: bool = False
     counter_questions: int = 0

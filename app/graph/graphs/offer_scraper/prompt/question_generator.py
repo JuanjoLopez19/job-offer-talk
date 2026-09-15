@@ -1,9 +1,8 @@
-QUESTION_GENERATOR_PROMPT = """{role}
-
-## Tarea
+QUESTION_GENERATOR_PROMPT = """## Tarea
 Tu objetivo principal es generar {question_numbers} preguntas sobre la oferta de trabajo que se te proporciona.
 Para que al usuario le sirva como preparación para la entrevista.
-Siempre en español y en texto plano, independientemente del idioma en que este la oferta de trabajo.
+Redacta todos los campos narrativos en español de España, independientemente del idioma de la oferta.
+Conserva únicamente en su idioma original los nombres propios y los nombres de tecnologías.
 
 ### Instrucciones
 - Analiza la oferta de trabajo y todos sus detalles antes de generar las preguntas.
@@ -13,5 +12,4 @@ Siempre en español y en texto plano, independientemente del idioma en que este 
 
 ## Oferta de trabajo
 {job_offer}
-
 """

@@ -25,11 +25,12 @@ def test_user_message_sends_transcript_then_assistant_text(
         thread_id: str,
     ) -> GraphState:
         assert graph_input.user_input == "Esta es mi respuesta"
+        assert graph_input.is_tts_active is True
         assert thread_id == "session-1"
         return GraphState(
             session_id=thread_id,
             assistant_message="¿Qué experiencia tienes?",
-            is_tts_message=False,
+            is_tts_active=False,
         )
 
     stt = FakeSTT()
@@ -43,6 +44,7 @@ def test_user_message_sends_transcript_then_assistant_text(
             {
                 "event": "user_message",
                 "content_type": "audio/webm;codecs=opus",
+                "is_tts_active": True,
                 "turn_id": "turn-1",
             }
         )

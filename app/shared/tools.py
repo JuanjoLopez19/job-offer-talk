@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Any, Literal
 
+from bs4 import BeautifulSoup
 from job_offer_scraper_mcp.shared.constants import JobOfferInfo
 
 from app.graph.core.config import GraphState
@@ -53,7 +54,11 @@ def remove_question_from_list(questions_list: list[str], question: str) -> list[
 
 def is_tts_response(response: GraphState) -> bool:
     return bool(
-        response.is_tts_message
+        response.is_tts_active
         and response.assistant_message
         and response.assistant_message.strip()
     )
+
+
+def remove_html_tags(text: str) -> str:
+    return BeautifulSoup(text, "html.parser").get_text()
