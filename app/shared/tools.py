@@ -62,3 +62,11 @@ def is_tts_response(response: GraphState) -> bool:
 
 def remove_html_tags(text: str) -> str:
     return BeautifulSoup(text, "html.parser").get_text()
+
+
+def check_ollama_model(model_name: str) -> bool:
+    import ollama
+
+    models = ollama.list()
+
+    return any(m.model == model_name for m in models.models)

@@ -7,7 +7,8 @@
     "check": "pnpm --dir frontend check",
     "dev:frontend": "pnpm --dir frontend dev",
     "prepare": "husky",
-    "test:frontend": "pnpm --dir frontend test"
+    "test:frontend": "pnpm --dir frontend test",
+    "preview:frontend": "pnpm --dir frontend preview"
   },
   "devDependencies": {
     "husky": "^9.1.7"

@@ -5,6 +5,7 @@ from typing import ClassVar, assert_never
 from langchain_core.language_models import BaseChatModel
 
 from app.core.config import Config, Provider, ReasoningLevel, ReasoningLevels
+from app.shared.tools import check_ollama_model
 
 
 @dataclass(frozen=True, slots=True)
@@ -128,6 +129,8 @@ class LLMFactory:
             case Provider.OLLAMA:
                 from langchain_ollama.chat_models import ChatOllama
 
+                if not check_ollama_model(key.model):
+                    raise ValueError(f"Model {key.model} not found in Ollama")
                 return ChatOllama(
                     model=key.model,
                     temperature=key.temperature,

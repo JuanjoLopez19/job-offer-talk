@@ -1,0 +1,3744 @@
+{
+  "version": "2.17",
+  "children": [
+    {
+      "type": "frame",
+      "id": "Kwrze",
+      "x": 0,
+      "y": 0,
+      "name": "Component / Primary Button",
+      "reusable": true,
+      "fill": "$ink",
+      "cornerRadius": 4,
+      "gap": 8,
+      "padding": [
+        4,
+        20
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "PzQbb",
+          "name": "Button Label",
+          "fill": "$canvas",
+          "content": "Abrir entrevista",
+          "lineHeight": 2,
+          "fontFamily": "$font-mono",
+          "fontSize": 16,
+          "fontWeight": "500"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ofHCY",
+      "x": 260,
+      "y": 0,
+      "name": "Component / Secondary Button",
+      "reusable": true,
+      "fill": "$canvas",
+      "cornerRadius": 4,
+      "stroke": "$hairline-strong",
+      "strokeWidth": 1,
+      "gap": 8,
+      "padding": [
+        4,
+        20
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "dBLBL",
+          "name": "Secondary Button Label",
+          "fill": "$ink",
+          "content": "Ver flujo",
+          "lineHeight": 2,
+          "fontFamily": "$font-mono",
+          "fontSize": 16,
+          "fontWeight": "500"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "npB2q",
+      "x": 520,
+      "y": 0,
+      "name": "Component / Chat Message",
+      "reusable": true,
+      "width": 360,
+      "fill": "$surface-soft",
+      "cornerRadius": 4,
+      "stroke": "$hairline",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 6,
+      "padding": [
+        12,
+        14
+      ],
+      "children": [
+        {
+          "type": "text",
+          "id": "LBjbE",
+          "name": "Message Role",
+          "fill": "$mute",
+          "content": "sistema",
+          "lineHeight": 1.5,
+          "fontFamily": "$font-mono",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "QykIR",
+          "name": "Message Body",
+          "fill": "$body",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Mensaje del asistente",
+          "lineHeight": 1.5,
+          "fontFamily": "$font-mono",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "hq1R3",
+      "x": 520,
+      "y": 171,
+      "name": "Vista 1 / Landing JobTalk",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 1440,
+      "height": 2020,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "iiFiz",
+          "name": "Landing Nav",
+          "width": "fill_container",
+          "height": 64,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            72
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "k7jYDK",
+              "name": "ASCII Wordmark",
+              "fill": "$ink",
+              "content": "[ JobTalk ]",
+              "lineHeight": 1.2,
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "d2TT3I",
+              "name": "Landing Nav Links",
+              "gap": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "z3uxMY",
+                  "name": "Nav Link / Producto",
+                  "fill": "$body",
+                  "content": "Producto",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "lnrsb",
+                  "name": "Nav Link / Flujo",
+                  "fill": "$body",
+                  "content": "Flujo",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Om2zy",
+                  "name": "Nav Link / Voz",
+                  "fill": "$body",
+                  "content": "Voz",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "uRF40",
+                  "name": "Nav Link / API",
+                  "fill": "$body",
+                  "content": "API",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "id": "gCpVE",
+              "type": "ref",
+              "ref": "Kwrze",
+              "name": "Nav CTA",
+              "descendants": {
+                "PzQbb": {
+                  "content": "Probar ahora"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eyMHb",
+          "name": "Landing Hero Wrap",
+          "width": 1100,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            72,
+            0,
+            0,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "CCJyQ",
+              "name": "Hero Badge",
+              "fill": "$surface-dark",
+              "cornerRadius": 4,
+              "gap": 10,
+              "padding": [
+                2,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XwpbA",
+                  "name": "Hero Badge Text",
+                  "fill": "$on-dark",
+                  "content": "[beta] entrevistas desde una URL",
+                  "lineHeight": 2,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "D65zw9",
+              "name": "Hero Headline",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": 900,
+              "content": "JobTalk practica entrevistas con un asistente que entiende la oferta",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "$font-mono",
+              "fontSize": 38,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "c8mpFP",
+              "name": "Hero Subhead",
+              "fill": "$body",
+              "textGrowth": "fixed-width",
+              "width": 760,
+              "content": "Pega una vacante, revisa los requisitos extraidos y entra en una simulacion conversacional unica con preguntas relevantes, feedback accionable y soporte de voz.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "ztEkl",
+              "name": "Hero CTA Row",
+              "gap": 12,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "kK9o7",
+                  "type": "ref",
+                  "ref": "Kwrze",
+                  "name": "Hero Primary CTA",
+                  "descendants": {
+                    "PzQbb": {
+                      "content": "Abrir entrevista"
+                    }
+                  }
+                },
+                {
+                  "id": "bWqXT",
+                  "type": "ref",
+                  "ref": "ofHCY",
+                  "name": "Hero Secondary CTA",
+                  "descendants": {
+                    "dBLBL": {
+                      "content": "Ver arquitectura"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WCTbC",
+              "name": "Hero Chat TUI Mockup",
+              "clip": true,
+              "width": 1100,
+              "height": 360,
+              "fill": "$surface-dark",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": [
+                40,
+                48
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "T1z1D",
+                  "name": "TUI ASCII Title",
+                  "fill": "$on-dark",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JOBTALK\n[ entrevista guiada ]",
+                  "lineHeight": 1.1,
+                  "textAlign": "center",
+                  "fontFamily": "$font-mono",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "ia6kW",
+                  "name": "TUI Prompt Row",
+                  "width": "fill_container",
+                  "fill": "$surface-dark-elevated",
+                  "cornerRadius": 4,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gjwTZ",
+                      "name": "TUI Command",
+                      "fill": "$on-dark",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "| Analiza https://empresa.com/jobs/backend-ai y prepara una entrevista tecnica",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nMmJx",
+                      "name": "TUI Status",
+                      "fill": "$ash",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "modo: sesion temporal  ·  voz: disponible  ·  sin historial guardado",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zlJdV",
+                  "name": "TUI Output Columns",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "I2bWLL",
+                      "name": "Terminal Fact / [+] oferta",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "r79fTI",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[+] oferta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "f3qUMO",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "stack detectado: Python, FastAPI, LangGraph",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gPoQ2",
+                      "name": "Terminal Fact / [+] preguntas",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gRzGc",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[+] preguntas",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "LiAlz",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "8 preguntas adaptadas al seniority",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w8Zl9",
+                      "name": "Terminal Fact / [x] checkpoints",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "IR8Cp",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[x] checkpoints",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "dqA8b",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "reanuda el turno exacto tras cada respuesta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "buAHx",
+          "name": "GitHub Pages Video Player",
+          "metadata": {
+            "type": "github-pages-video",
+            "visibility": "github-pages-only",
+            "videoUrl": "https://bucket.jjlopez.dev/videos/job_talk_demo.mp4"
+          },
+          "width": 960,
+          "height": 480,
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            0,
+            0,
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "D6pvi",
+              "name": "Video Player Header",
+              "width": "fill_container",
+              "height": 70,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hzdve",
+                  "name": "Video Header Copy",
+                  "width": 560,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "a326J",
+                      "name": "Video Eyebrow",
+                      "fill": "$accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "DEPLOYMENT PREVIEW",
+                      "lineHeight": 1.35,
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "agssx",
+                      "name": "Video Title",
+                      "fill": "$ink-deep",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Demo interactiva de JobTalk",
+                      "lineHeight": 1.35,
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 26,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "etShg",
+                  "name": "GitHub Pages Only Badge",
+                  "fill": "#EAF3FF",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Wrhb1",
+                      "name": "Badge Deploy Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "globe",
+                      "library": "lucide",
+                      "fill": "$accent"
+                    },
+                    {
+                      "type": "text",
+                      "id": "r8rySk",
+                      "name": "Badge Label",
+                      "fill": "$accent",
+                      "content": "solo GitHub Pages",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qMJIV",
+              "name": "Embedded MP4 Player Shell",
+              "clip": true,
+              "width": "fill_container",
+              "height": 360,
+              "fill": "#141414",
+              "cornerRadius": 10,
+              "stroke": "#0F000033",
+              "strokeWidth": 1,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0F000026",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 38,
+                "spread": -12
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "S5HQUd",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Video Poster Gradient",
+                  "opacity": 0.86,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#1E293B",
+                        "position": 0
+                      },
+                      {
+                        "color": "#007AFF",
+                        "position": 0.54
+                      },
+                      {
+                        "color": "#30D158",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 960,
+                  "height": 360
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 8,
+                  "id": "tpnbi",
+                  "x": 38,
+                  "y": 38,
+                  "name": "Terminal Pattern Overlay",
+                  "fill": "#0B1220CC",
+                  "width": 884,
+                  "height": 214,
+                  "stroke": "#FFFFFF24",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "text",
+                  "id": "oycmK",
+                  "x": 66,
+                  "y": 66,
+                  "name": "Poster Terminal Line 1",
+                  "fill": "#F4F7F8",
+                  "content": "$ jobtalk demo --offer ./senior-frontend.md",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "OzIcz",
+                  "x": 66,
+                  "y": 104,
+                  "name": "Poster Terminal Line 2",
+                  "fill": "#C6CDD2",
+                  "content": "analizando requisitos, cultura y señales de impacto",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "XFcLY",
+                  "x": 66,
+                  "y": 142,
+                  "name": "Poster Terminal Line 3",
+                  "fill": "#C6CDD2",
+                  "content": "generando preguntas probables + respuestas STAR",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "kmB9o",
+                  "x": 66,
+                  "y": 180,
+                  "name": "Poster Terminal Line 4",
+                  "fill": "$success",
+                  "content": "listo: sesión de práctica con feedback en tiempo real",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "Yyrk6",
+                  "x": 420,
+                  "y": 124,
+                  "name": "Play Button Halo",
+                  "fill": "#00000052",
+                  "width": 120,
+                  "height": 120,
+                  "stroke": "#FFFFFF66",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "ellipse",
+                  "id": "Ki3O5",
+                  "x": 438,
+                  "y": 142,
+                  "name": "Play Button Surface",
+                  "fill": "#FDFCFC",
+                  "width": 84,
+                  "height": 84,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000073",
+                    "offset": {
+                      "x": 0,
+                      "y": 14
+                    },
+                    "blur": 26,
+                    "spread": -8
+                  }
+                },
+                {
+                  "type": "icon",
+                  "id": "qlsXp",
+                  "x": 468,
+                  "y": 166,
+                  "name": "Play Icon",
+                  "width": 36,
+                  "height": 36,
+                  "icon": "play",
+                  "library": "lucide",
+                  "fill": "#007AFF"
+                },
+                {
+                  "type": "frame",
+                  "id": "hhAH5",
+                  "layoutPosition": "absolute",
+                  "x": 0,
+                  "y": 296,
+                  "name": "Video Controls Bar",
+                  "width": 960,
+                  "height": 64,
+                  "fill": "#05070ACC",
+                  "gap": 18,
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "K4m8Jt",
+                      "name": "Control Play Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "play",
+                      "library": "lucide",
+                      "fill": "#FDFCFC"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nrNjq",
+                      "name": "Control Timestamp",
+                      "fill": "#C6CDD2",
+                      "content": "0:00 / 2:14",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "CEpLN",
+                      "name": "Progress Track",
+                      "width": "fill_container",
+                      "height": 6,
+                      "fill": "#FFFFFF33",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "RPJez",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Progress Filled",
+                          "fill": "$accent",
+                          "width": 126,
+                          "height": 6
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon",
+                      "id": "Ewln0",
+                      "name": "Volume Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "volume-2",
+                      "library": "lucide",
+                      "fill": "#FDFCFC"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "C27so",
+                      "name": "Fullscreen Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "maximize",
+                      "library": "lucide",
+                      "fill": "#FDFCFC"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yiGkb",
+          "name": "Landing Content Sections",
+          "width": 960,
+          "layout": "vertical",
+          "gap": 80,
+          "padding": [
+            96,
+            0,
+            0,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "zyo6W",
+              "name": "Section / What It Does",
+              "width": "fill_container",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "D9qbj",
+                  "name": "What It Does Title",
+                  "fill": "$ink",
+                  "content": "[+] Que hace JobTalk",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Mdmx0",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Extrae la oferta    Convierte una URL en requisitos, responsabilidades y tecnologias clave.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "D6Djq",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Genera preguntas    Prepara una entrevista alineada con el rol, no un cuestionario generico.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "hQKCz",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Mantiene el turno   Conserva solo el contexto necesario durante la practica activa.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Nv9gq",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Integra voz        El candidato puede contestar hablando cuando el modo de voz este activo.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tcBY7",
+              "name": "Section / Interview Flow",
+              "width": "fill_container",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "AsGnq",
+                  "name": "Flow Title",
+                  "fill": "$ink",
+                  "content": "[+] Flujo de una sesion",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "l9lb62",
+                  "name": "Flow Steps Row",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j3nQay",
+                      "name": "Flow Step / 01",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kGDuB",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[01]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SpR0K",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Pega la URL de la oferta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "f0A49",
+                      "name": "Flow Step / 02",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "i4etmA",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[02]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vQEhz",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Revisa los datos extraidos",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NpuuL",
+                      "name": "Flow Step / 03",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oQa6L",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[03]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "m8g0v",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Responde en una unica sesion",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "y2CTw",
+                      "name": "Flow Step / 04",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NL5cG",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[04]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "N7bCw",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Cierra con feedback accionable",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yoIa8",
+          "name": "Landing Footer",
+          "width": 960,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "top": 1
+          },
+          "padding": [
+            64,
+            0,
+            32,
+            0
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "QFKJ1",
+              "name": "Footer Copyright",
+              "fill": "$mute",
+              "content": "©2026 JobTalk",
+              "lineHeight": 2,
+              "fontFamily": "$font-mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "iihJu",
+              "name": "Footer Links",
+              "fill": "$mute",
+              "content": "Docs · API · Privacidad",
+              "lineHeight": 2,
+              "fontFamily": "$font-mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "j9mraq",
+      "x": 2056,
+      "y": 171,
+      "name": "Vista 2 / Chat JobTalk",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "K1C1N",
+          "name": "Chat Top Bar",
+          "width": "fill_container",
+          "height": 64,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            28
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ByFsT",
+              "name": "Chat Product Label",
+              "fill": "$ink",
+              "content": "[ JobTalk / entrevista ]",
+              "lineHeight": 1.5,
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Q2fdE5",
+              "name": "Chat Runtime Status",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "K1Mp8n",
+                  "name": "Status Dot",
+                  "fill": "$success",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "w5DBn",
+                  "name": "Status Text",
+                  "fill": "$mute",
+                  "content": "sesion temporal · voz disponible",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fSAXh",
+          "name": "Chat Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "qqXCl",
+              "name": "Chat Sidebar",
+              "width": 304,
+              "height": "fill_container",
+              "fill": "$surface-soft",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "right": 1
+              },
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                24,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U23Z3",
+                  "name": "New Interview Button",
+                  "width": "fill_container",
+                  "fill": "$ink",
+                  "cornerRadius": 4,
+                  "gap": 8,
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OqEPR",
+                      "name": "New Interview Plus",
+                      "fill": "$canvas",
+                      "content": "[+]",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "z4dhl",
+                      "name": "New Interview Label",
+                      "fill": "$canvas",
+                      "content": "nueva sesion",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "xFDEW",
+                  "name": "Sidebar Section Title",
+                  "fill": "$ink",
+                  "content": "sesion actual",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "lTg7p",
+                  "name": "Sidebar Hint",
+                  "fill": "$mute",
+                  "textGrowth": "fixed-width",
+                  "width": 264,
+                  "content": "JobTalk no muestra historial en esta version. Cada visita inicia una practica independiente con texto y voz opcional.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "W7ai3h",
+                  "name": "Session Summary Card",
+                  "width": 264,
+                  "fill": "$surface-card",
+                  "cornerRadius": 8,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u8ncO",
+                      "name": "Session Summary Label",
+                      "fill": "$mute",
+                      "content": "oferta cargada",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OcwBN",
+                      "name": "Session Summary Title",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Backend AI Engineer",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t1RCyq",
+                      "name": "Session Summary Meta",
+                      "fill": "$body",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "8 preguntas · voz opcional · feedback final",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NBcNC",
+                  "name": "Privacy Mode Card",
+                  "width": 264,
+                  "fill": "$surface-soft",
+                  "cornerRadius": 8,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kmf2H",
+                      "name": "Privacy Mode Label",
+                      "fill": "$mute",
+                      "content": "privacidad",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y6B4F",
+                      "name": "Privacy Mode Text",
+                      "fill": "$body",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sin listado de entrevistas anteriores. La interfaz se centra en preparar y completar una oferta cada vez.",
+                      "lineHeight": 1.35,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YfENc",
+              "name": "Conversation Workspace",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$canvas",
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cdfXr",
+                  "name": "Conversation Header",
+                  "width": 860,
+                  "stroke": "$hairline",
+                  "strokeWidth": {
+                    "bottom": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    28,
+                    0,
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A8vkWm",
+                      "name": "Conversation Job Title",
+                      "fill": "$ink",
+                      "content": "Backend AI Engineer · practica actual",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ybBSa",
+                      "name": "Conversation Job Meta",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "fuente: oferta extraida · preguntas adaptadas · turno 4 de 8 · sin historial persistente",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yVMmX",
+                  "name": "Messages Panel",
+                  "width": 860,
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    28,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z912NA",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "NUoiB",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "He analizado la oferta. El rol prioriza FastAPI, LangGraph, Redis y observabilidad con Langfuse. Esta practica vive solo en la sesion actual."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "g1QxGB",
+                      "name": "Message Row / user",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "id": "E76v8T",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / user",
+                          "width": 640,
+                          "fill": "$surface-card",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "tu"
+                            },
+                            "QykIR": {
+                              "content": "Perfecto, quiero practicar respuestas tecnicas pero tambien explicar decisiones de producto."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dZhvV",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "x6FJz",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "Pregunta 1: describe como diseniarias el flujo para pausar una entrevista, guardar estado y reanudarla con el mismo session_id."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "A3usj5",
+                      "name": "Message Row / user",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "id": "seKsl",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / user",
+                          "width": 640,
+                          "fill": "$surface-card",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "tu"
+                            },
+                            "QykIR": {
+                              "content": "Usaria un grafo con checkpoints en Redis y un thread_id estable. Cada respuesta reanuda desde la interrupcion pendiente."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BG70p",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "AyvVq",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "Bien. Ahora concreta que informacion mantendrias durante esta entrevista y que no conservarias al salir por privacidad."
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UlqdT",
+                  "name": "Input Dock",
+                  "width": 860,
+                  "stroke": "$hairline",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    0,
+                    28,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "jMsNi",
+                      "name": "Text Input Row",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "z5atV",
+                          "name": "Input Placeholder",
+                          "fill": "$mute",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Escribe tu respuesta o pulsa el microfono para hablar...",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "m6snv",
+                          "name": "Microphone Button",
+                          "width": 40,
+                          "height": 40,
+                          "fill": "$canvas",
+                          "cornerRadius": 4,
+                          "stroke": "$hairline-strong",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "NjrYt",
+                              "name": "Microphone Icon",
+                              "width": 18,
+                              "height": 18,
+                              "icon": "mic",
+                              "library": "lucide",
+                              "fill": "$ink"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "U22yE9",
+                          "name": "Send Button",
+                          "width": 84,
+                          "height": 40,
+                          "fill": "$ink",
+                          "cornerRadius": 4,
+                          "gap": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gJQXZ",
+                              "name": "Send Label",
+                              "fill": "$canvas",
+                              "content": "Enviar",
+                              "lineHeight": 1.5,
+                              "fontFamily": "$font-mono",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "CvsNn",
+                      "name": "Input Helper Text",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Solo texto y voz. Al cerrar la pagina, no se presenta un historial de conversaciones.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "YHyPV",
+      "x": 520,
+      "y": 1791,
+      "name": "Vista 1 Dark / Landing JobTalk",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 1440,
+      "height": 2020,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "d0O51",
+          "name": "Landing Nav",
+          "width": "fill_container",
+          "height": 64,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            72
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "z42SEe",
+              "name": "ASCII Wordmark",
+              "fill": "$ink",
+              "content": "[ JobTalk ]",
+              "lineHeight": 1.2,
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "hzUhc",
+              "name": "Landing Nav Links",
+              "gap": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "tDHV7",
+                  "name": "Nav Link / Producto",
+                  "fill": "$body",
+                  "content": "Producto",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "ijiLA",
+                  "name": "Nav Link / Flujo",
+                  "fill": "$body",
+                  "content": "Flujo",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "S4MUC",
+                  "name": "Nav Link / Voz",
+                  "fill": "$body",
+                  "content": "Voz",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "jkqeM",
+                  "name": "Nav Link / API",
+                  "fill": "$body",
+                  "content": "API",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "id": "zHNgM",
+              "type": "ref",
+              "ref": "Kwrze",
+              "name": "Nav CTA",
+              "descendants": {
+                "PzQbb": {
+                  "content": "Probar ahora"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "XKs0z",
+          "name": "Landing Hero Wrap",
+          "width": 1100,
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            72,
+            0,
+            0,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "NqkR7",
+              "name": "Hero Badge",
+              "fill": "$surface-dark",
+              "cornerRadius": 4,
+              "gap": 10,
+              "padding": [
+                2,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "W5Svr",
+                  "name": "Hero Badge Text",
+                  "fill": "$on-dark",
+                  "content": "[dark mode] entrevistas desde una URL",
+                  "lineHeight": 2,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "fb1AW",
+              "name": "Hero Headline",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": 900,
+              "content": "JobTalk practica entrevistas con un asistente que entiende la oferta",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "$font-mono",
+              "fontSize": 38,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "abMzp",
+              "name": "Hero Subhead",
+              "fill": "$body",
+              "textGrowth": "fixed-width",
+              "width": 760,
+              "content": "Pega una vacante, revisa los requisitos extraidos y entra en una simulacion conversacional unica con preguntas relevantes, feedback accionable y soporte de voz.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "S9lYZV",
+              "name": "Hero CTA Row",
+              "gap": 12,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "aY7NV",
+                  "type": "ref",
+                  "ref": "Kwrze",
+                  "name": "Hero Primary CTA",
+                  "descendants": {
+                    "PzQbb": {
+                      "content": "Abrir entrevista"
+                    }
+                  }
+                },
+                {
+                  "id": "ZOKwT",
+                  "type": "ref",
+                  "ref": "ofHCY",
+                  "name": "Hero Secondary CTA",
+                  "descendants": {
+                    "dBLBL": {
+                      "content": "Ver arquitectura"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j4h2L",
+              "name": "Hero Chat TUI Mockup",
+              "clip": true,
+              "width": 1100,
+              "height": 360,
+              "fill": "$surface-dark",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": [
+                40,
+                48
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "jE7zs",
+                  "name": "TUI ASCII Title",
+                  "fill": "$on-dark",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JOBTALK\n[ entrevista guiada ]",
+                  "lineHeight": 1.1,
+                  "textAlign": "center",
+                  "fontFamily": "$font-mono",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "L94zc",
+                  "name": "TUI Prompt Row",
+                  "width": "fill_container",
+                  "fill": "$surface-dark-elevated",
+                  "cornerRadius": 4,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yZXMC",
+                      "name": "TUI Command",
+                      "fill": "$on-dark",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "| Analiza https://empresa.com/jobs/backend-ai y prepara una entrevista tecnica",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "h82BEs",
+                      "name": "TUI Status",
+                      "fill": "$ash",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "modo: sesion temporal  ·  voz: disponible  ·  sin historial guardado",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cG8zl",
+                  "name": "TUI Output Columns",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "IOQFc",
+                      "name": "Terminal Fact / [+] oferta",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lRdlE",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[+] oferta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cNMSl",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "stack detectado: Python, FastAPI, LangGraph",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "d0gWI",
+                      "name": "Terminal Fact / [+] preguntas",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VSpUu",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[+] preguntas",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "H1v5h",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "8 preguntas adaptadas al seniority",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JtNHp",
+                      "name": "Terminal Fact / [x] checkpoints",
+                      "width": "fill_container",
+                      "fill": "#302C2C",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline-strong",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jowjl",
+                          "name": "Terminal Fact Label",
+                          "fill": "$success",
+                          "content": "[x] checkpoints",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gbtEN",
+                          "name": "Terminal Fact Body",
+                          "fill": "$on-dark",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "reanuda el turno exacto tras cada respuesta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "M5l8O",
+          "name": "GitHub Pages Video Player",
+          "metadata": {
+            "type": "github-pages-video",
+            "visibility": "github-pages-only",
+            "videoUrl": "https://bucket.jjlopez.dev/videos/job_talk_demo.mp4"
+          },
+          "width": 960,
+          "height": 480,
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            0,
+            0,
+            32,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "c0oxDr",
+              "name": "Video Player Header",
+              "width": "fill_container",
+              "height": 70,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "p7T97S",
+                  "name": "Video Header Copy",
+                  "width": 560,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "GPxie",
+                      "name": "Video Eyebrow",
+                      "fill": "$accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "DEPLOYMENT PREVIEW",
+                      "lineHeight": 1.35,
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IMg1A",
+                      "name": "Video Title",
+                      "fill": "$ink-deep",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Demo interactiva de JobTalk",
+                      "lineHeight": 1.35,
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 26,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ctiID",
+                  "name": "GitHub Pages Only Badge",
+                  "fill": "#26313A",
+                  "cornerRadius": 6,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "N3SbCY",
+                      "name": "Badge Deploy Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "globe",
+                      "library": "lucide",
+                      "fill": "$accent"
+                    },
+                    {
+                      "type": "text",
+                      "id": "N0ovt",
+                      "name": "Badge Label",
+                      "fill": "$accent",
+                      "content": "solo GitHub Pages",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kWBqF",
+              "name": "Embedded MP4 Player Shell",
+              "clip": true,
+              "width": "fill_container",
+              "height": 360,
+              "fill": "#090C0F",
+              "cornerRadius": 10,
+              "stroke": "#FFFFFF2B",
+              "strokeWidth": 1,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#00000099",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 38,
+                "spread": -12
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "id": "bwiLR",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Video Poster Gradient",
+                  "opacity": 0.86,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#151A20",
+                        "position": 0
+                      },
+                      {
+                        "color": "#007AFF",
+                        "position": 0.54
+                      },
+                      {
+                        "color": "#1B2B21",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 960,
+                  "height": 360
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 8,
+                  "id": "wktNl",
+                  "x": 38,
+                  "y": 38,
+                  "name": "Terminal Pattern Overlay",
+                  "fill": "#090C0FCC",
+                  "width": 884,
+                  "height": 214,
+                  "stroke": "#FFFFFF24",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "text",
+                  "id": "O5THO",
+                  "x": 66,
+                  "y": 66,
+                  "name": "Poster Terminal Line 1",
+                  "fill": "#F4F7F8",
+                  "content": "$ jobtalk demo --offer ./senior-frontend.md",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "RV4AI",
+                  "x": 66,
+                  "y": 104,
+                  "name": "Poster Terminal Line 2",
+                  "fill": "#C6CDD2",
+                  "content": "analizando requisitos, cultura y señales de impacto",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "FnUPK",
+                  "x": 66,
+                  "y": 142,
+                  "name": "Poster Terminal Line 3",
+                  "fill": "#C6CDD2",
+                  "content": "generando preguntas probables + respuestas STAR",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "O3Ehf",
+                  "x": 66,
+                  "y": 180,
+                  "name": "Poster Terminal Line 4",
+                  "fill": "$success",
+                  "content": "listo: sesión de práctica con feedback en tiempo real",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "b9Yo0M",
+                  "x": 420,
+                  "y": 124,
+                  "name": "Play Button Halo",
+                  "fill": "#00000052",
+                  "width": 120,
+                  "height": 120,
+                  "stroke": "#FFFFFF66",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "ellipse",
+                  "id": "na54Y",
+                  "x": 438,
+                  "y": 142,
+                  "name": "Play Button Surface",
+                  "fill": "#FDFCFC",
+                  "width": 84,
+                  "height": 84,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000073",
+                    "offset": {
+                      "x": 0,
+                      "y": 14
+                    },
+                    "blur": 26,
+                    "spread": -8
+                  }
+                },
+                {
+                  "type": "icon",
+                  "id": "dIz7p",
+                  "x": 468,
+                  "y": 166,
+                  "name": "Play Icon",
+                  "width": 36,
+                  "height": 36,
+                  "icon": "play",
+                  "library": "lucide",
+                  "fill": "#007AFF"
+                },
+                {
+                  "type": "frame",
+                  "id": "YfvI8",
+                  "layoutPosition": "absolute",
+                  "x": 0,
+                  "y": 296,
+                  "name": "Video Controls Bar",
+                  "width": 960,
+                  "height": 64,
+                  "fill": "#05070ACC",
+                  "gap": 18,
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Ib0IQ",
+                      "name": "Control Play Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "play",
+                      "library": "lucide",
+                      "fill": "#FDFCFC"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uZgME",
+                      "name": "Control Timestamp",
+                      "fill": "#C6CDD2",
+                      "content": "0:00 / 2:14",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O2gdlx",
+                      "name": "Progress Track",
+                      "width": "fill_container",
+                      "height": 6,
+                      "fill": "#FFFFFF33",
+                      "cornerRadius": 4,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "Vi7vq",
+                          "x": 0,
+                          "y": 0,
+                          "name": "Progress Filled",
+                          "fill": "$accent",
+                          "width": 126,
+                          "height": 6
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon",
+                      "id": "n6yE8",
+                      "name": "Volume Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "volume-2",
+                      "library": "lucide",
+                      "fill": "#FDFCFC"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "BaBNn",
+                      "name": "Fullscreen Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "maximize",
+                      "library": "lucide",
+                      "fill": "#FDFCFC"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "H00jxE",
+          "name": "Landing Content Sections",
+          "width": 960,
+          "layout": "vertical",
+          "gap": 80,
+          "padding": [
+            96,
+            0,
+            0,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "FQ1mx",
+              "name": "Section / What It Does",
+              "width": "fill_container",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "MnBGa",
+                  "name": "What It Does Title",
+                  "fill": "$ink",
+                  "content": "[+] Que hace JobTalk",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "MQAhN",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Extrae la oferta    Convierte una URL en requisitos, responsabilidades y tecnologias clave.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "YRXzy",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Genera preguntas    Prepara una entrevista alineada con el rol, no un cuestionario generico.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "hy0xJ",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Mantiene el turno   Conserva solo el contexto necesario durante la practica activa.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "FRMS4",
+                  "name": "Benefit Row",
+                  "fill": "$body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "[+] Integra voz        El candidato puede contestar hablando cuando el modo de voz este activo.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NHp3M",
+              "name": "Section / Interview Flow",
+              "width": "fill_container",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "top": 1
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mjTKK",
+                  "name": "Flow Title",
+                  "fill": "$ink",
+                  "content": "[+] Flujo de una sesion",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "fc40f",
+                  "name": "Flow Steps Row",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "W1vJk",
+                      "name": "Flow Step / 01",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XhxPW",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[01]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XhfKD",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Pega la URL de la oferta",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "E4pirr",
+                      "name": "Flow Step / 02",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xsUD9",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[02]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OkHTQ",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Revisa los datos extraidos",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IkXVZ",
+                      "name": "Flow Step / 03",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "JMXiu",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[03]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cn8DW",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Responde en una unica sesion",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NQ7Rm",
+                      "name": "Flow Step / 04",
+                      "width": "fill_container",
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "M4EaL",
+                          "name": "Flow Step Number",
+                          "fill": "$mute",
+                          "content": "[04]",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hLKHX",
+                          "name": "Flow Step Label",
+                          "fill": "$ink",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Cierra con feedback accionable",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eu61A",
+          "name": "Landing Footer",
+          "width": 960,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "top": 1
+          },
+          "padding": [
+            64,
+            0,
+            32,
+            0
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "qNt6T",
+              "name": "Footer Copyright",
+              "fill": "$mute",
+              "content": "©2026 JobTalk",
+              "lineHeight": 2,
+              "fontFamily": "$font-mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "UHsU4",
+              "name": "Footer Links",
+              "fill": "$mute",
+              "content": "Docs · API · Privacidad",
+              "lineHeight": 2,
+              "fontFamily": "$font-mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "CsXcp",
+      "x": 2040,
+      "y": 1791,
+      "name": "Vista 2 Dark / Chat JobTalk",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "uvQ89",
+          "name": "Chat Top Bar",
+          "width": "fill_container",
+          "height": 64,
+          "stroke": "$hairline",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            28
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "gacrk",
+              "name": "Chat Product Label",
+              "fill": "$ink",
+              "content": "[ JobTalk / entrevista ]",
+              "lineHeight": 1.5,
+              "fontFamily": "$font-mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "l2cn8q",
+              "name": "Chat Runtime Status",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "qosI4",
+                  "name": "Status Dot",
+                  "fill": "$success",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "wWmjQ",
+                  "name": "Status Text",
+                  "fill": "$mute",
+                  "content": "sesion temporal · voz disponible",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qwzyY",
+          "name": "Chat Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "s4ln5G",
+              "name": "Chat Sidebar",
+              "width": 304,
+              "height": "fill_container",
+              "fill": "$surface-soft",
+              "stroke": "$hairline",
+              "strokeWidth": {
+                "right": 1
+              },
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                24,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pFMIl",
+                  "name": "New Interview Button",
+                  "width": "fill_container",
+                  "fill": "$ink",
+                  "cornerRadius": 4,
+                  "gap": 8,
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "q6Hgz",
+                      "name": "New Interview Plus",
+                      "fill": "$canvas",
+                      "content": "[+]",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Nx9I2",
+                      "name": "New Interview Label",
+                      "fill": "$canvas",
+                      "content": "nueva sesion",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "vAHWo",
+                  "name": "Sidebar Section Title",
+                  "fill": "$ink",
+                  "content": "sesion actual",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "XffKn",
+                  "name": "Sidebar Hint",
+                  "fill": "$mute",
+                  "textGrowth": "fixed-width",
+                  "width": 264,
+                  "content": "JobTalk no muestra historial en esta version. Cada visita inicia una practica independiente con texto y voz opcional.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font-mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "lHMyP",
+                  "name": "Session Summary Card",
+                  "width": 264,
+                  "fill": "$surface-card",
+                  "cornerRadius": 8,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X3dMi",
+                      "name": "Session Summary Label",
+                      "fill": "$mute",
+                      "content": "oferta cargada",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "I6e55",
+                      "name": "Session Summary Title",
+                      "fill": "$ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Backend AI Engineer",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jac7p",
+                      "name": "Session Summary Meta",
+                      "fill": "$body",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "8 preguntas · voz opcional · feedback final",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "j6jH5",
+                  "name": "Privacy Mode Card",
+                  "width": 264,
+                  "fill": "$surface-soft",
+                  "cornerRadius": 8,
+                  "stroke": "$hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X15S8",
+                      "name": "Privacy Mode Label",
+                      "fill": "$mute",
+                      "content": "privacidad",
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lrTmy",
+                      "name": "Privacy Mode Text",
+                      "fill": "$body",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sin listado de entrevistas anteriores. La interfaz se centra en preparar y completar una oferta cada vez.",
+                      "lineHeight": 1.35,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "baKsE",
+              "name": "Conversation Workspace",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "$canvas",
+              "layout": "vertical",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "I8xM2",
+                  "name": "Conversation Header",
+                  "width": 860,
+                  "stroke": "$hairline",
+                  "strokeWidth": {
+                    "bottom": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    28,
+                    0,
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QOp7g",
+                      "name": "Conversation Job Title",
+                      "fill": "$ink",
+                      "content": "Backend AI Engineer · practica actual",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J2ak0b",
+                      "name": "Conversation Job Meta",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "fuente: oferta extraida · preguntas adaptadas · turno 4 de 8 · sin historial persistente",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "p1onB",
+                  "name": "Messages Panel",
+                  "width": 860,
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    28,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LlqDA",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "Q4ujB",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "He analizado la oferta. El rol prioriza FastAPI, LangGraph, Redis y observabilidad con Langfuse. Esta practica vive solo en la sesion actual."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "QdefA",
+                      "name": "Message Row / user",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "id": "zv2e2",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / user",
+                          "width": 640,
+                          "fill": "$surface-card",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "tu"
+                            },
+                            "QykIR": {
+                              "content": "Perfecto, quiero practicar respuestas tecnicas pero tambien explicar decisiones de producto."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tgYpt",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "sh5JI",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "Pregunta 1: describe como diseniarias el flujo para pausar una entrevista, guardar estado y reanudarla con el mismo session_id."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "U03ILo",
+                      "name": "Message Row / user",
+                      "width": "fill_container",
+                      "justifyContent": "end",
+                      "children": [
+                        {
+                          "id": "Y148i",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / user",
+                          "width": 640,
+                          "fill": "$surface-card",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "tu"
+                            },
+                            "QykIR": {
+                              "content": "Usaria un grafo con checkpoints en Redis y un thread_id estable. Cada respuesta reanuda desde la interrupcion pendiente."
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FGV3d",
+                      "name": "Message Row / system",
+                      "width": "fill_container",
+                      "children": [
+                        {
+                          "id": "L8tZY",
+                          "type": "ref",
+                          "ref": "npB2q",
+                          "name": "Message Bubble / system",
+                          "width": 640,
+                          "fill": "$surface-soft",
+                          "descendants": {
+                            "LBjbE": {
+                              "content": "sistema"
+                            },
+                            "QykIR": {
+                              "content": "Bien. Ahora concreta que informacion mantendrias durante esta entrevista y que no conservarias al salir por privacidad."
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Lz0kc",
+                  "name": "Input Dock",
+                  "width": 860,
+                  "stroke": "$hairline",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    0,
+                    28,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "S5AMOP",
+                      "name": "Text Input Row",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "$surface-soft",
+                      "cornerRadius": 4,
+                      "stroke": "$hairline",
+                      "strokeWidth": 1,
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "aD9WC",
+                          "name": "Input Placeholder",
+                          "fill": "$mute",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Escribe tu respuesta o pulsa el microfono para hablar...",
+                          "lineHeight": 1.5,
+                          "fontFamily": "$font-mono",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ed86d",
+                          "name": "Microphone Button",
+                          "width": 40,
+                          "height": 40,
+                          "fill": "$canvas",
+                          "cornerRadius": 4,
+                          "stroke": "$hairline-strong",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "RGF6K",
+                              "name": "Microphone Icon",
+                              "width": 18,
+                              "height": 18,
+                              "icon": "mic",
+                              "library": "lucide",
+                              "fill": "$ink"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "x3Jsd",
+                          "name": "Send Button",
+                          "width": 84,
+                          "height": 40,
+                          "fill": "$ink",
+                          "cornerRadius": 4,
+                          "gap": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cACJj",
+                              "name": "Send Label",
+                              "fill": "$canvas",
+                              "content": "Enviar",
+                              "lineHeight": 1.5,
+                              "fontFamily": "$font-mono",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "kPSkj",
+                      "name": "Input Helper Text",
+                      "fill": "$mute",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Solo texto y voz. Al cerrar la pagina, no se presenta un historial de conversaciones.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font-mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
+  "variables": {
+    "canvas": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FDFCFC",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#111315",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "ink": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#201D1D",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F4F7F8",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "ink-deep": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0F0000",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FFFFFF",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "body": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#424245",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#C6CDD2",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "mute": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#646262",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#99A3AA",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "ash": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#9A9898",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#707A82",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "surface-soft": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#F8F7F7",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#171B1F",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "surface-card": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#F1EEEE",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#20262B",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "surface-dark": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#201D1D",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#090C0F",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "surface-dark-elevated": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#302C2C",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#151A20",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "hairline": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0F00001F",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FFFFFF24",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "hairline-strong": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#646262",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#58636B",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#007AFF",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#5EA8FF",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "success": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#30D158",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#5BE07A",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "warning": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FF9F0A",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FFB84D",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "danger": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FF3B30",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FF6A62",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "on-dark": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FDFCFC",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F4F7F8",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "font-mono": {
+      "type": "string",
+      "value": "IBM Plex Mono"
+    },
+    "gap-sm": {
+      "type": "number",
+      "value": 8
+    },
+    "gap-md": {
+      "type": "number",
+      "value": 12
+    },
+    "gap-lg": {
+      "type": "number",
+      "value": 16
+    },
+    "gap-xl": {
+      "type": "number",
+      "value": 24
+    },
+    "gap-xxl": {
+      "type": "number",
+      "value": 32
+    }
+  },
+  "fileToken": "709cf848-ad1f-4d14-830e-9b44b0d2ccd0"
+}

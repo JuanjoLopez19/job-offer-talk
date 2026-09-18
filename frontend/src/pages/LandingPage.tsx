@@ -2,6 +2,9 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { InterviewCta } from "../components/layout/InterviewCta";
 import { SiteHeader } from "../components/layout/SiteHeader";
+import { isGitHubPages } from "../config/environment";
+
+const DEMO_VIDEO_URL = "https://bucket.jjlopez.dev/videos/job_talk_demo.mp4";
 
 const benefits = [
   [
@@ -20,6 +23,8 @@ const benefits = [
 ];
 
 export function LandingPage() {
+  const showDemoVideo = isGitHubPages();
+
   return (
     <div className="landing">
       <SiteHeader />
@@ -63,6 +68,34 @@ export function LandingPage() {
             </div>
           </div>
         </section>
+
+        {showDemoVideo && (
+          <section className="demo-section" id="demo" aria-labelledby="demo-title">
+            <div className="demo-section__meta">
+              <span className="demo-section__eyebrow">Deployment preview</span>
+              <span className="demo-section__badge">● solo GitHub Pages</span>
+            </div>
+            <h2 id="demo-title">Demo interactiva de JobTalk</h2>
+            <p id="demo-description">
+              Mira cómo JobTalk convierte una oferta en una entrevista guiada.
+            </p>
+            <div className="demo-section__player">
+              <video
+                aria-label="Demostración de una sesión de entrevista en JobTalk"
+                aria-describedby="demo-description"
+                autoPlay
+                controls
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                <source src={DEMO_VIDEO_URL} type="video/mp4" />
+                Tu navegador no permite reproducir este vídeo.
+              </video>
+            </div>
+          </section>
+        )}
 
         <section
           className="content-section"

@@ -73,7 +73,7 @@ class Config(BaseSettings):
     langfuse_base_url: str
     langfuse_trace_name: str = Field("job-offer-talk")
 
-    llm_provider: Provider = Field(Provider.GOOGLE)
+    llm_provider: Provider = Field(Provider.GOOGLE, alias="PROVIDER")
     google_api_key: str | None = None
     openai_api_key: str | None = None
     anthropic_api_key: str | None = None

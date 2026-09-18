@@ -1,3 +1,5 @@
+import traceback
+
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
 
@@ -79,6 +81,7 @@ def generate_question_node(state: GraphState):
         output = LLMOutput.model_validate(ai_message)
         first_question = output.questions[0]
     except Exception as e:
+        print(traceback.format_exc())
         get_logger(__name__).error(f"Error generating question: {e}")
         return {
             GraphStateFields.ASSISTANT_MESSAGE: GENERATE_QUESTION_ERROR_MESSAGE,

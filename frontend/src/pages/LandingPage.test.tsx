@@ -24,6 +24,9 @@ describe("LandingPage", () => {
     expect(
       screen.getByRole("link", { name: /abrir entrevista/i }).getAttribute("href"),
     ).toBe("/interview");
+    expect(
+      screen.queryByLabelText(/demostración de una sesión de entrevista/i),
+    ).toBeNull();
   });
 
   it("redirige las llamadas a la acción al repositorio en GitHub Pages", () => {
@@ -44,6 +47,18 @@ describe("LandingPage", () => {
         "https://github.com/JuanjoLopez19/job-offer-talk",
       );
     }
+
+    const demoVideo = screen.getByLabelText(/demostración de una sesión de entrevista/i);
+    const demoSource = demoVideo.querySelector("source");
+    expect(demoSource?.getAttribute("src")).toBe(
+      "https://bucket.jjlopez.dev/videos/job_talk_demo.mp4",
+    );
+    expect(demoSource?.getAttribute("type")).toBe("video/mp4");
+    expect(demoVideo.hasAttribute("autoplay")).toBe(true);
+    expect(demoVideo.hasAttribute("controls")).toBe(true);
+    expect(demoVideo.hasAttribute("loop")).toBe(true);
+    expect((demoVideo as HTMLVideoElement).muted).toBe(true);
+    expect(screen.getByText(/solo GitHub Pages/i)).toBeTruthy();
   });
 });
 
