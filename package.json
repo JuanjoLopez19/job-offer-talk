@@ -5,6 +5,7 @@
   "scripts": {
     "build": "pnpm --dir frontend build",
     "check": "pnpm --dir frontend check",
+    "format": "pnpm --dir frontend format",
     "dev:frontend": "pnpm --dir frontend dev",
     "prepare": "husky",
     "test:frontend": "pnpm --dir frontend test",
