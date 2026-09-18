@@ -1,3 +1,4 @@
 uv run pre-commit run --all-files
+pnpm format
 pnpm check
 pnpm test:frontend
