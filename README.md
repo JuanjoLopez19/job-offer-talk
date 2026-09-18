@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="frontend/public/jobtalk-icon.png" width="112" alt="Icono de JobTalk" />
+  <img src="frontend/public/jobtalk-icon.webp" width="112" alt="Icono de JobTalk" />
 </p>
 
 <h1 align="center">JobTalk</h1>
