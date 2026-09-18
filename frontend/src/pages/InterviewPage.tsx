@@ -20,7 +20,7 @@ export function InterviewPage() {
         <Link className="wordmark" to="/">
           <img
             className="brand-icon"
-            src={`${import.meta.env.BASE_URL}jobtalk-icon.png`}
+            src={`${import.meta.env.BASE_URL}jobtalk-icon.webp`}
             alt=""
             aria-hidden="true"
           />

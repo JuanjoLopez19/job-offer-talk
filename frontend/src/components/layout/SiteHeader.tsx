@@ -8,7 +8,7 @@ export function SiteHeader() {
       <Link className="wordmark" to="/" aria-label="JobTalk, inicio">
         <img
           className="brand-icon"
-          src={`${import.meta.env.BASE_URL}jobtalk-icon.png`}
+          src={`${import.meta.env.BASE_URL}jobtalk-icon.webp`}
           alt=""
           aria-hidden="true"
         />
