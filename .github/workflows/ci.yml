@@ -20,6 +20,16 @@ jobs:
     name: Backend quality
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      ENVIRONMENT: TEST
+      REDIS__URL: redis://localhost:6379/0
+      STT__MODEL_NAME: medium
+      STT__DEVICE: cpu
+      TTS__VOICE: em_alex
+      TTS__DEVICE: cpu
+      LANGFUSE_SECRET_KEY: test-secret-key
+      LANGFUSE_PUBLIC_KEY: test-public-key
+      LANGFUSE_BASE_URL: https://example.invalid
 
     steps:
       - name: Checkout repository
