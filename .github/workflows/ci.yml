@@ -34,7 +34,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install backend dependencies
-        run: uv sync --frozen --dev --extra google
+        run: uv sync --frozen --dev --all-extras
 
       - name: Check Python formatting
         run: uv run ruff format --check .
