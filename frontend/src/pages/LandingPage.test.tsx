@@ -58,7 +58,6 @@ describe("LandingPage", () => {
     expect(demoVideo.hasAttribute("controls")).toBe(true);
     expect(demoVideo.hasAttribute("loop")).toBe(true);
     expect((demoVideo as HTMLVideoElement).muted).toBe(true);
-    expect(screen.getByText(/solo GitHub Pages/i)).toBeTruthy();
   });
 });
 

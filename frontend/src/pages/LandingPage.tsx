@@ -73,7 +73,6 @@ export function LandingPage() {
           <section className="demo-section" id="demo" aria-labelledby="demo-title">
             <div className="demo-section__meta">
               <span className="demo-section__eyebrow">Deployment preview</span>
-              <span className="demo-section__badge">● solo GitHub Pages</span>
             </div>
             <h2 id="demo-title">Demo interactiva de JobTalk</h2>
             <p id="demo-description">
