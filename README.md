@@ -142,8 +142,11 @@ GOOGLE_MODEL=gemini-3.7-flash
 
 STT__MODEL_NAME=medium
 STT__DEVICE=cpu
-TTS__VOICE=em_alex
+TTS__VOICE=es_ES-davefx-medium
 TTS__DEVICE=cpu
+# El modelo español se descarga al arrancar en TTS__PIPER_MODEL_DIR.
+TTS__PROVIDER=piper
+TTS__PIPER_MODEL_DIR=~/.cache/job-offer-talk/piper
 ```
 
 Para otro proveedor, instala su extra, cambia `LLM_PROVIDER` y define su clave y
@@ -329,8 +332,11 @@ GOOGLE_API_KEY=your_key
 GOOGLE_MODEL=gemini-3.7-flash
 STT__MODEL_NAME=medium
 STT__DEVICE=cpu
-TTS__VOICE=em_alex
+TTS__VOICE=es_ES-davefx-medium
 TTS__DEVICE=cpu
+# The Spanish model is downloaded at startup to TTS__PIPER_MODEL_DIR.
+TTS__PROVIDER=piper
+TTS__PIPER_MODEL_DIR=~/.cache/job-offer-talk/piper
 ```
 
 For a different provider, install its extra, update `LLM_PROVIDER`, and define the

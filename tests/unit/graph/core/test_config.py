@@ -27,4 +27,4 @@ def test_audio_providers_have_local_defaults() -> None:
     config = Config()
 
     assert config.stt.provider is SttProvider.WHISPER
-    assert config.tts.provider is TtsProvider.KOKORO
+    assert config.tts.provider is TtsProvider.PIPER
