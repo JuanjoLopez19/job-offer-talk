@@ -4,6 +4,8 @@ import torch
 from pydantic import BaseModel, Field, RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from app.services.tts.piper_voice import DEFAULT_PIPER_VOICE
+
 
 class Provider(StrEnum):
     """Supported LLM providers."""
@@ -20,6 +22,7 @@ class SttProvider(StrEnum):
 
 class TtsProvider(StrEnum):
     KOKORO = "kokoro"
+    PIPER = "piper"
 
 
 class SttConfig(BaseModel):
@@ -29,9 +32,10 @@ class SttConfig(BaseModel):
 
 
 class TtsConfig(BaseModel):
-    voice: str = Field("em_alex")
+    voice: str = Field(DEFAULT_PIPER_VOICE)
     device: str = Field("cuda" if torch.cuda.is_available() else "cpu")
-    provider: TtsProvider = Field(TtsProvider.KOKORO)
+    provider: TtsProvider = Field(TtsProvider.PIPER)
+    piper_model_dir: str = Field("~/.cache/job-offer-talk/piper")
 
 
 class ReasoningLevel(BaseModel):

@@ -4,6 +4,7 @@ from typing import ClassVar
 from app.core.config import TtsProvider
 from app.services.tts.common.base import BaseTTS
 from app.services.tts.implementations.kokoro_tts import KokoroTTS
+from app.services.tts.implementations.piper_tts import PiperTTS
 
 
 class TTSFactory:
@@ -29,5 +30,7 @@ class TTSFactory:
     def _create_tts(cls, tts_provider: TtsProvider) -> BaseTTS:
         if tts_provider == TtsProvider.KOKORO:
             return KokoroTTS()
+        if tts_provider == TtsProvider.PIPER:
+            return PiperTTS()
         else:
             raise ValueError(f"Invalid TTS provider: {tts_provider}")

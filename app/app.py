@@ -3,9 +3,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.api.v1.__init_ import main_router
-from app.core.config import Provider
+from app.core.config import Provider, TtsProvider
 from app.core.logger import get_logger, suppress_model_loading_noise
 from app.services.stt.runtime import LazySTT
+from app.services.tts.piper_voice import DEFAULT_PIPER_VOICE, ensure_piper_voice
 from app.services.tts.runtime import LazyTTS
 
 
@@ -22,9 +23,18 @@ async def lifespan(app: FastAPI):
         model_name=config.stt.model_name,
         device=config.stt.device,
     )
+    voice_name = config.tts.voice
+    if config.tts.provider == TtsProvider.PIPER:
+        if voice_name == "em_alex":
+            voice_name = DEFAULT_PIPER_VOICE
+        voice_name = ensure_piper_voice(
+            voice_name,
+            config.tts.piper_model_dir,
+        ).as_posix()
+
     app.state.tts = LazyTTS(
         provider=config.tts.provider,
-        voice_name=config.tts.voice,
+        voice_name=voice_name,
         device=config.tts.device,
     )
 

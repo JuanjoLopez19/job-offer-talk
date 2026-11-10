@@ -28,6 +28,17 @@ def test_get_tts_reuses_the_same_kokoro_instance(
     assert isinstance(first, FakeKokoroTTS)
 
 
+def test_get_tts_creates_piper_instance(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class FakePiperTTS:
+        pass
+
+    monkeypatch.setattr("app.services.tts.tts_factory.PiperTTS", FakePiperTTS)
+
+    assert isinstance(TTSFactory.get_tts(TtsProvider.PIPER), FakePiperTTS)
+
+
 def test_get_tts_raises_for_invalid_provider() -> None:
     with pytest.raises(ValueError, match="Invalid TTS provider: invalid"):
         TTSFactory.get_tts("invalid")  # type: ignore[arg-type]
